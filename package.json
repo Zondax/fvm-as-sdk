@@ -1,0 +1,30 @@
+{
+  "name": "fvm-as-sdk",
+  "version": "0.1.0",
+  "description": "Filecoin Virtual Machine SDK for AssemblyScript language",
+  "main": "assembly/index.ts",
+  "scripts": {
+    "asbuild:debug": "asc assembly/index.ts --target debug --use abort=",
+    "asbuild:release": "asc assembly/index.ts --target release --use abort=",
+    "asbuild": "yarn run asbuild:debug && npm run asbuild:release"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zondax/fvm-as-sdk.git"
+  },
+  "keywords": [
+    "FVM",
+    "AssemblyScript",
+    "as",
+    "sdk"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Zondax/fvm-as-sdk/issues"
+  },
+  "homepage": "https://github.com/Zondax/fvm-as-sdk#readme",
+  "devDependencies": {
+    "assemblyscript": "^0.20.4"
+  }
+}
