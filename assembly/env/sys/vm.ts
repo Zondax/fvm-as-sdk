@@ -22,4 +22,12 @@ export namespace vm{
     /// None. This function doesn't return.
     @external("vm", "abort")
     export declare function abort(code: u32, message_off: isize, message_len: u32):isize;
+
+    /// Returns the details about this invocation.
+    ///
+    /// # Errors
+    ///
+    /// None
+    @external("vm", "context")
+    export declare function context(resp_ptr: isize): isize;
 }

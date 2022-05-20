@@ -5,8 +5,7 @@ export namespace self{
 
     /// Gets the current root for the calling actor.
     ///
-    /// If the CID doesn't fit in the specified maximum length (and/or the length is 0), this
-    /// function returns the required size and does not update the cid buffer.
+    /// Returns the size of the CID.
     ///
     /// # Arguments
     ///
@@ -15,10 +14,11 @@ export namespace self{
     ///
     /// # Errors
     ///
-    /// | Error                | Reason                                             |
-    /// |----------------------|----------------------------------------------------|
-    /// | [`IllegalOperation`] | actor hasn't set the root yet, or has been deleted |
-    /// | [`IllegalArgument`]  | if the passed buffer isn't valid, in memory, etc.  |
+    /// | Error                | Reason                                                |
+    /// |----------------------|-------------------------------------------------------|
+    /// | [`IllegalOperation`] | actor hasn't set the root yet, or has been deleted    |
+    /// | [`IllegalArgument`]  | if the passed buffer isn't valid, in memory, etc.     |
+    /// | [`BufferTooSmall`]  | if the output buffer isn't large enough to fit the CID |
     @external("self", "root")
     export declare function root(resp_ptr: isize, cid:isize, cid_max_len: u32) :isize;
 

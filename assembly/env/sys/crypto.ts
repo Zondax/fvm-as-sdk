@@ -18,10 +18,12 @@ export namespace crypto{
     ///
     /// | Error               | Reason                                               |
     /// |---------------------|------------------------------------------------------|
+    /// | [`NotFound`]        | the signer's address could not be resolved           |
     /// | [`IllegalArgument`] | signature, address, or plaintext buffers are invalid |
     @external("crypto", "verify_signature")
     export declare function verify_signature(
         respPtr: isize,
+        sig_type: u32,
         sig_off: isize,
         sig_len: u32,
         addr_off: isize,
@@ -30,25 +32,33 @@ export namespace crypto{
         plaintext_len: u32,
     ) :isize;
 
-    /// Hashes input data using blake2b with 256 bit output.
+    /// Hashes input data using the specified hash function. The digest is written to the passed
+    /// digest buffer and truncated to `digest_len`.
     ///
-    /// Returns a 32-byte hash digest.
+    /// Returns the length of the digest written to the digest buffer.
     ///
     /// # Arguments
     ///
     /// - `data_off` and `data_len` specify location and length of the data to be hashed.
+    /// - `digest_off` and `digest_len` specify the location and length of the output digest buffer.
+    ///
+    /// **NOTE:** The digest and input buffers _may_ overlap.
     ///
     /// # Errors
     ///
     /// | Error               | Reason                                          |
     /// |---------------------|-------------------------------------------------|
     /// | [`IllegalArgument`] | the input buffer does not point to valid memory |
-    @external("crypto", "hash_blake2b")
+    @external("crypto", "hash")
     export declare function hash_blake2b(
         respPtr:isize,
+        hash_code: u64,
         data_off: isize,
         data_len: u32,
+        digest_off: isize,
+        digest_len: u32,
     ) :isize;
+
 
     /// Computes an unsealed sector CID (CommD) from its constituent piece CIDs
     /// (CommPs) and sizes.
@@ -66,9 +76,10 @@ export namespace crypto{
     ///
     /// # Errors
     ///
-    /// | Error               | Reason                   |
-    /// |---------------------|--------------------------|
-    /// | [`IllegalArgument`] | an argument is malformed |
+    /// | Error               | Reason                                                 |
+    /// |---------------------|--------------------------------------------------------|
+    /// | [`IllegalArgument`] | an argument is malformed                               |
+    /// | [`BufferTooSmall`]  | if the output buffer isn't large enough to fit the CID |
     @external("crypto", "compute_unsealed_sector_cid")
     export declare function compute_unsealed_sector_cid(
         resp_off: isize,
