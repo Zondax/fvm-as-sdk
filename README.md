@@ -1,5 +1,7 @@
 
 # FVM AssemblyScript SDK
+[![GithubActions](https://github.com/Zondax/fvm-as-sdk/actions/workflows/main.yaml/badge.svg)](https://github.com/Zondax/fvm-as-sdk/blob/master/.github/workflows/main.yaml)
+
 
 ---
 
@@ -54,7 +56,11 @@ used on each helper function. Each one will have its own purpose.
 ### Utils
 Any other auxiliary function SDK needs in order to handle some specific task, such as parsing base64 arrays or handling cid values, finds its place in this folder.
 
+## Use cases
+- [Hello world](https://github.com/Zondax/fil-hello-world-actor-as)
+
 ## Docs
+Here you will find some useful links to every data source you can use to further increase your knowledge about different topics.
 - [Filecion](https://filecoin.io)
 - [AssemblyScript](https://www.assemblyscript.org)
 - [FVM specs](https://github.com/filecoin-project/fvm-specs)
