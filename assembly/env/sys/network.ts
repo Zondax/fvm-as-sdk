@@ -4,22 +4,6 @@ export namespace network{
     // # Network #
     // ###########
 
-    /// Gets the current epoch.
-    ///
-    /// # Errors
-    ///
-    /// None
-    @external("network", "curr_epoch")
-    export declare function curr_epoch(respPtr: isize): isize;
-
-    /// Gets the network version.
-    ///
-    /// # Errors
-    ///
-    /// None
-    @external("network", "version")
-    export declare function version(respPtr:isize): isize;
-
     /// Gets the base fee for the current epoch.
     ///
     /// # Errors

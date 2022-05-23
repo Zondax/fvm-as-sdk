@@ -1,5 +1,7 @@
 export type ActorID = u64
+export type MethodNum = u64
 export type Codec = u64
+export type ChainEpoch = i64
 
 export class IpldOpen {
     constructor(
@@ -18,4 +20,9 @@ export class IpldStat {
 
 export class Cid {
     constructor(public value: string, public raw: Uint8Array, public len: u32) {}
+}
+
+export class InvocationContext {
+    constructor(public caller: ActorID, public receiver: ActorID, public method_number: MethodNum,
+                public network_curr_epoch: ChainEpoch, public network_version: u32) {}
 }
