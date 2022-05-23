@@ -18,8 +18,8 @@
     "as",
     "sdk"
   ],
-  "author": "",
-  "license": "ISC",
+  "author": "Zondax AG",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/Zondax/fvm-as-sdk/issues"
   },
