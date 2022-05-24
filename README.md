@@ -17,6 +17,24 @@ They predict this will unleash a profileration of new services and tools that ca
 
 For more information, please refer to the FVM Specs [context-and-goals web page](https://github.com/filecoin-project/fvm-specs#context-and-goals).
 
+### FVM architecture
+**The native FVM runtime is WebAssembly (WASM), and users can technically write actors in any programming that compiles to WASM.**
+However, there are language-specific overheads that users need to be aware of (e.g. runtime, garbage collection, stdlibs, etc.) They affect the WASM output leading to bloated WASM bytecode and inefficient execution. There will be on-chain code size limits to consider too.
+
+Rust is the primary language recommendation for writing efficient user-defined actors. Hence, the reference FVM SDK is built in Rust. 
+
+For more information, please refer to the FVM Specs [architecture web page](https://github.com/filecoin-project/fvm-specs/blob/main/01-architecture.md).
+
+### What is WebAssembly?
+WebAssembly (abbreviated Wasm) is a binary instruction format for a stack-based virtual machine. Wasm is designed as a portable compilation target for programming languages, enabling deployment on the web for client and server applications.
+Some of its features are:
+- Efficient and fast
+- Safe
+- Open and debuggabl
+- Part of the open web platform
+
+For more information, please refer to the [WebAssembly web page](https://webassembly.org).
+
 ### What is AssemblyScript?
 AssemblyScript compiles a variant of TypeScript (opens new window) (a typed superset of JavaScript) to WebAssembly (opens new window) using Binaryen
 
