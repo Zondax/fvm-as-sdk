@@ -40,20 +40,27 @@ export namespace actor {
     @external("actors", "get_actor_code_cid")
     export declare function get_actor_code_cid(respPrt: isize, actor_id: u64, obuf_off: isize, obuf_len: u32): isize;
 
-    /// Returns the builtin-actor type ID for the given CodeCID, or 0 if the CodeCID is not a
-    /// builtin actor.
+    /// Gets the CodeCID of an actor by address.
     ///
     /// # Arguments
     ///
-    /// - `cid_off` specifies the cid to be resolved.
+    /// - `actor_id` is the resolved ID of the target actor.
+    /// - `obuf_off` and `obuf_len` specify the location and length of a byte buffer into which the
+    ///   FVM will write the actor's code CID, if the actor is found.
+    ///
+    /// # Returns
+    ///
+    /// The length of the CID.
     ///
     /// # Errors
     ///
     /// | Error               | Reason                                                    |
     /// |---------------------|-----------------------------------------------------------|
-    /// | [`IllegalArgument`] | if the passed CID isn't valid                             |
-    @external("actors", "get_actor_code_cid")
-    export declare function resolve_builtin_actor_type(respPrt: isize, cid_off: isize): isize;
+    /// | [`NotFound`]        | if the target actor does not exist                        |
+    /// | [`BufferTooSmall`]  | if the output buffer isn't large enough to fit the CID    |
+    /// | [`IllegalArgument`] | if the passed address buffer isn't valid, in memory, etc. |
+    @external("actors", "get_builtin_actor_type")
+    export declare function get_builtin_actor_type(respPrt: isize, cid_off: isize): isize;
 
     /// Returns the CodeCID for the given built-in actor type.
     ///
@@ -73,7 +80,7 @@ export namespace actor {
     /// |---------------------|-----------------------------------------------------------------|
     /// | [`IllegalArgument`] | if the type is invalid, or the outupt buffer isn't large enough |
     @external("actors", "get_code_cid_for_type")
-    export declare function get_code_cid_for_type(respPrt: isize, typ: i32, obuf_off: isize, obuf_len: u32): isize;
+    export declare function get_code_cid_for_type(respPrt: isize, typ: i32, obuf_off: isize, obuf_len: isize): isize;
 
     /// Generates a new actor address for an actor deployed
     /// by the calling actor.
