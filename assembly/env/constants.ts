@@ -12,3 +12,5 @@ export const DAG_CBOR: u64 = 0x71
 
 // https://github.com/multiformats/multicodec/blob/master/table.csv
 export const DAG_JSON: u64 = 0x0129
+
+export const RANDOMNESS_LENGTH: usize = 32

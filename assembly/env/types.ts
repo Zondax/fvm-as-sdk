@@ -1,7 +1,21 @@
+export type BlockId = u32;
 export type ActorID = u64
 export type MethodNum = u64
 export type Codec = u64
 export type ChainEpoch = i64
+
+export class Send {
+    constructor(
+        public exit_code: u32,
+        public return_id: BlockId,
+        public return_codec: u64,
+        public return_size: u32,
+    ){}
+}
+
+export class TokenAmount{
+    constructor(lo: u64, hi: u64) {}
+}
 
 export class IpldOpen {
     constructor(
