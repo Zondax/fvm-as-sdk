@@ -72,6 +72,15 @@ used on each helper function. Each one will have its own purpose.
 ### Utils
 Any other auxiliary function SDK needs in order to handle some specific task, such as parsing base64 arrays or handling cid values, finds its place in this folder.
 
+## How to use it? 
+### Compile
+To compile the project to WASM, please run `yarn asbuild`. It will generate two binaries, `debug.wasm` and `release.wasm`.
+
+### Import on another project
+Most cases you will use this project as a building block to create more advanced applications. If you want to import it on that project, you just need to
+do `yarn add fvm-as-sdk` to add it to your project. Then, you only need to import it using `import sdk from "fvm-as-sdk/assembly"`. All the functions will 
+be then available for you to use.
+
 ## Use cases
 - [Hello world](https://github.com/Zondax/fil-hello-world-actor-as)
 
