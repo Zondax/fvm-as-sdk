@@ -84,12 +84,110 @@ Most cases you will use this project as a building block to create more advanced
 do `yarn add fvm-as-sdk` to add it to your project. Then, you only need to import it using `import sdk from "fvm-as-sdk/assembly"`. All the functions will 
 be then available for you to use.
 
+## Smart contract building tips
+
+### Function `invoke`
+This is the entry point to any WASM code. Every time you run the code, this function will be called by default. From this func you should execute the correct function depending on the 
+method number the call has. 
+
+### Function `constructor`
+This is the **method 1** by default. When you execute the `create-actor` command, this is going to be executed. At this stage you should create a new storage on the blockchain using IPLD. If you do 
+it, it will get attached to this specific instance. 
+
+### Function `<other-functions>`
+You will be able to call other functions by different method numbers. From two to n, you can match them on a switch in the invoke function.
+
+## How to run it? 
+First, you need to install your smart contract on the FVM. Once you have done it, you need to create an instance of it. You can create as many instances as you want. Each one will
+live in its own storage space. Finally, you will be able to invoke methods the smart contract has.
+
+```
+# Install Actor
+lotus chain install-actor <path-to-wasm-binary>
+
+# Instantiate Actor
+lotus chain create-actor <actor-id-from-previous-step>
+
+# Invoke actor
+lotus chain invoke <method_num>
+```
+
+## How to test it?
+In order to test your smart contracts, today we have two different options. You can choose either a local VM written on Rust or using a full filecoin dev node.
+
+### Local dev node
+We have created a docker container with everything you need in order to start a working dev net node. The branch you should look at is [here](https://github.com/Zondax/rosetta-filecoin/tree/experimental/dev-fmv-m2). 
+You could clone the repository, build the image locally and finally run it. Please, take the following instructions as an example on how you could do it. 
+
+```
+git clone https://github.com/Zondax/rosetta-filecoin.git
+cd rosetta-filecoin
+git checkout experimental/dev-fmv-m2
+make build_devnet
+docker run -v <working_dir_path>:/app zondax/filecoin-devnet:latest
+```
+
+### Self-hosted runner
+Using the same docker image we mentioned before, you can create a CI workflow on GitHub as a self-hosted runner. 
+Please, refer to GitHub docs on how to add a runner to your project [here](https://docs.github.com/en/actions/hosting-your-own-runners/adding-self-hosted-runners).
+Here you have a CI workflow example to run your smart contract on a self-hosted runner.
+
+```
+name: Build
+on:
+  - push
+  
+jobs:
+  build:
+    timeout-minutes: 5
+    runs-on: self-hosted
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Install node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.13.0'
+      - name: Install dependencies
+        run: |
+          npm install -g yarn
+          yarn install
+      - name: Build WASM file
+        run: yarn asbuild
+      - name: Install Hello Actor in Lotus
+        run: |
+          ~/lotus/lotus version
+          ~/lotus/lotus chain install-actor build/debug.wasm >> output.txt
+          cat output.txt
+      - name: Create Hello Actor in Lotus
+        run: |
+          cid=$(sed -n 's/^Actor Code CID: //p' output.txt)
+          echo $cid
+          ~/lotus/lotus chain create-actor $cid >> output.txt
+          cat output.txt
+      - name: Get status actor
+        run: |
+          address=$(sed -n 's/^ID Address: //p' output.txt)
+          ~/lotus/lotus state get-actor $address
+```
+
+To see an actual CI working, please go to the "Hello world" example to see how it is done.
+
+### Local Rust VM 
+The past two choices described have some trade-offs you should know. The devnet node will consume a lot of resources on your machine, as it is a full network working on itself (a miner is even active in order to allow the network to work).
+Because of that, you may want to limit how many resources the container can consume. The self-hosted runner won't take your precious resources, but it will require you to have a server up and running every time you want to run the CI.
+This cost money. The local rust VM is lightweight, can be run as many times as you want from scratch, and it takes almost no resources of your machine. **This option is under development yet, and it will be ready soon.**
+
 ## Use cases
 - [Hello world](https://github.com/Zondax/fil-hello-world-actor-as)
 
 ## Docs
 Here you will find some useful links to every data source you can use to further increase your knowledge about different topics.
-- [Filecion](https://filecoin.io)
+- [Filecoin](https://filecoin.io)
 - [AssemblyScript](https://www.assemblyscript.org)
 - [FVM specs](https://github.com/filecoin-project/fvm-specs)
+- [Rust Hello world](https://github.com/raulk/fil-hello-world-actor)
+- [Go SDK](https://github.com/ipfs-force-community/go-fvm-sdk)
 
