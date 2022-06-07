@@ -3,7 +3,7 @@ import {Codec, IpldStat, IpldOpen} from "../env";
 
 export function create(codec: u64, data: Uint8Array ): u32 {
     const respPtr = memory.data(sizeof<u32>())
-    const dataPtr = changetype<usize>(data)
+    const dataPtr = changetype<usize>(data.dataStart)
     const dataLen = data.length
 
     // TODO Check if ipld.create func ran successfully
@@ -14,7 +14,7 @@ export function create(codec: u64, data: Uint8Array ): u32 {
 
 export function cid(id: u32, hash_fun: u64, hash_len: u32, cidBuf: Uint8Array): u32 {
     const respPtr = memory.data(sizeof<u32>())
-    const cidBufPtr = changetype<usize>(cidBuf)
+    const cidBufPtr = changetype<usize>(cidBuf.dataStart)
     const cidBufLen = cidBuf.length
 
     // TODO Check if ipld.create func ran successfully
@@ -26,7 +26,7 @@ export function cid(id: u32, hash_fun: u64, hash_len: u32, cidBuf: Uint8Array): 
 
 export function read(id: u32, offset: u32, buf:Uint8Array): u32 {
     const respPtr = memory.data(sizeof<u32>())
-    const dataPtr = changetype<usize>(buf)
+    const dataPtr = changetype<usize>(buf.dataStart)
     const dataLen = buf.length
 
     // TODO Check if ipld.create func ran successfully
@@ -50,7 +50,7 @@ export function stat(id: u32): IpldStat {
 
 export function open(id: Uint8Array): IpldOpen {
     const respPtr = memory.data(sizeof<u32>() + sizeof<Codec>() + sizeof<u32>()) // Id + Codec + Size
-    const dataPtr = changetype<usize>(id)
+    const dataPtr = changetype<usize>(id.dataStart)
 
     // TODO Check if ipld.create func ran successfully
     ipld.open(respPtr, dataPtr)
