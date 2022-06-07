@@ -22,5 +22,5 @@ export function Get(cidVal: Cid): Uint8Array {
 export function GetBlock(id: u32, size: u32): Uint8Array {
     const block = new Uint8Array(size)
     const bytesRead = read(id, 0, block)
-    return block.slice(0, bytesRead)
+    return block
 }

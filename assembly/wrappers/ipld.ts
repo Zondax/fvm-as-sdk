@@ -56,7 +56,7 @@ export function stat(id: u32): IpldStat {
 }
 
 export function open(id: Uint8Array): IpldOpen {
-    const respPtr = memory.data(sizeof<u32>() + sizeof<Codec>() + sizeof<u32>()) // Id + Codec + Size
+    const respPtr = memory.data(sizeof<Codec>() + sizeof<u32>() + sizeof<u32>()) // Id + Codec + Size
     const dataPtr = changetype<usize>(id.dataStart)
 
     if(ipld.open(respPtr, dataPtr) != 0){
@@ -64,9 +64,14 @@ export function open(id: Uint8Array): IpldOpen {
         return new IpldOpen(0, 0, 0)
     }
 
-    const rcvId: u32 = load<u32>(respPtr)
-    const codec: u64 = load<u64>(respPtr + sizeof<u32>())
-    const size: u32 = load<u32>(respPtr + sizeof<u32>() + sizeof<u64>())
+    let pos = 0
+    const codec: u64 = load<u64>(respPtr + pos)
+    pos += sizeof<u64>()
+
+    const rcvId: u32 = load<u32>(respPtr + pos)
+    pos += sizeof<u32>()
+
+    const size: u32 = load<u32>(respPtr + pos)
 
     const resp: IpldOpen = new IpldOpen(rcvId, codec, size)
     return resp

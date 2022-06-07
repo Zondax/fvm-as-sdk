@@ -10,7 +10,7 @@ export function setRoot(id: Cid): void {
     }
 }
 
-export function root(cidBuf: Uint8Array): u32 {
+export function root(cidBuf: Uint8Array): usize {
     const msgPrt = memory.data(sizeof<usize>())
     const dataPtr = changetype<usize>(cidBuf.dataStart)
     const dataLen = cidBuf.length
@@ -20,5 +20,5 @@ export function root(cidBuf: Uint8Array): u32 {
         return 0
     }
 
-    return load<u32>(msgPrt)
+    return load<usize>(msgPrt)
 }
