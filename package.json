@@ -1,5 +1,5 @@
 {
-  "name": "fvm-as-sdk",
+  "name": "@zondax/fvm-as-sdk",
   "version": "0.0.0",
   "description": "Filecoin Virtual Machine SDK for AssemblyScript language",
   "main": "assembly/index.ts",
