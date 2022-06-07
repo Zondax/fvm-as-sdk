@@ -1,3 +1,3 @@
-export * from "./wrappers"
-export * from "./env"
-export * from "./helpers"
+export * as wrappers from "./wrappers"
+export * as env from "./env"
+export * as helpers from "./helpers"
