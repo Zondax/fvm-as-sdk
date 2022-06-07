@@ -85,6 +85,8 @@ do `yarn add fvm-as-sdk` to add it to your project. Then, you only need to impor
 be then available for you to use.
 
 ## Smart contract building tips
+Please, refer to the "Hello World" example to see a working smart contract. You can use it as guidance or boilerplate to build your own smart contract.
+Here you have some lines about key functions related to a smart contract. 
 
 ### Function `invoke`
 This is the entry point to any WASM code. Every time you run the code, this function will be called by default. From this func you should execute the correct function depending on the 
