@@ -1,12 +1,12 @@
 {
   "name": "fvm-as-sdk",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "Filecoin Virtual Machine SDK for AssemblyScript language",
   "main": "assembly/index.ts",
   "scripts": {
     "asbuild:debug": "asc assembly/index.ts --target debug --use abort=",
     "asbuild:release": "asc assembly/index.ts --target release --use abort=",
-    "asbuild": "yarn run asbuild:debug && npm run asbuild:release"
+    "asbuild": "yarn run asbuild:debug && yarn run asbuild:release"
   },
   "repository": {
     "type": "git",
@@ -27,7 +27,8 @@
   "devDependencies": {
     "assemblyscript": "^0.20.4"
   },
-  "dependencies": {
-    "assemblyscript-json": "^1.1.0"
-  }
+  "dependencies": {},
+  "files": [
+    "assembly"
+  ]
 }
