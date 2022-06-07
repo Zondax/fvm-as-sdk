@@ -3,7 +3,7 @@ import {self} from "../env/sys/self";
 import {genericAbort} from "./errors";
 
 export function setRoot(id: Cid): void {
-    const dataPtr = changetype<usize>(id.raw)
+    const dataPtr = changetype<usize>(id.raw.dataStart)
 
     if(self.set_root(dataPtr) != 0){
         genericAbort(USR_ILLEGAL_STATE, "failed to set root CID")
