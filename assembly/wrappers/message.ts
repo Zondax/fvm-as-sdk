@@ -1,4 +1,3 @@
-import {usrIllegalState} from "./errors";
 import {context} from "./vm";
 
 export function methodNumber(): u64{

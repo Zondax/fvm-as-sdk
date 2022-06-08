@@ -6,7 +6,7 @@ export function cast(buf: Uint8Array): Cid{
     }
 
     const len = buf[1];
-    const raw = buf.slice(2, len)
+    const raw = buf.slice(0, len)
     const value = raw.toString()
 
     return new Cid(value, raw, len)
