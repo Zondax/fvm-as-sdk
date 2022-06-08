@@ -103,6 +103,11 @@ You will be able to call other functions by different method numbers. From two t
 First, you need to install your smart contract on the FVM. Once you have done it, you need to create an instance of it. You can create as many instances as you want. Each one will
 live in its own storage space. Finally, you will be able to invoke methods the smart contract has.
 
+![commands-sequence.png](docs/commands-sequence.png)
+
+### Small cheat sheet 
+Here you can find a small list of the commands you can run, and how you can get the inputs you need to run them.
+
 ```
 # Install Actor
 lotus chain install-actor <path-to-wasm-binary>
@@ -112,6 +117,12 @@ lotus chain create-actor <actor-id-from-previous-step>
 
 # Invoke actor
 lotus chain invoke <method_num>
+
+# Get actor state
+lotus state get-actor <address-id-from-create-actor-cmd>
+
+# Get actor storage
+lotus chain get <head-from-state-get-actor-cmd>
 ```
 
 ## How to test it?
@@ -135,44 +146,84 @@ Please, refer to GitHub docs on how to add a runner to your project [here](https
 Here you have a CI workflow example to run your smart contract on a self-hosted runner.
 
 ```
-name: Build
+name: "Checks"
 on:
   - push
-  
+
 jobs:
-  build:
+  build-test:
+    name: "Build and Test"
     timeout-minutes: 5
     runs-on: self-hosted
+    env:
+      VERDACCIO_TOKEN: ${{ secrets.VERDACCIO_READ_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        with:
-          submodules: true
       - name: Install node
         uses: actions/setup-node@v2
         with:
           node-version: '16.13.0'
+      - name: Install latest stable
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+      - name: Install yarn
+        run: npm install -g yarn
+      - name: Set npmrc
+        run: |
+          yarn config set @zondax:registry https://verdaccio.zondax.net/
+          npm config set //verdaccio.zondax.net/:_authToken "$VERDACCIO_TOKEN"
+          npm config set //verdaccio.zondax.net/:always-auth true
       - name: Install dependencies
         run: |
-          npm install -g yarn
           yarn install
+          make deps
       - name: Build WASM file
-        run: yarn asbuild
+        run: make build
+      - name: Test WASM on Rust VM
+        run: |
+          cd testing
+          cargo r
       - name: Install Hello Actor in Lotus
         run: |
-          ~/lotus/lotus version
-          ~/lotus/lotus chain install-actor build/debug.wasm >> output.txt
-          cat output.txt
+          lotus version
+          lotus chain install-actor build/release-final.wasm >> install.txt
+          cat install.txt
       - name: Create Hello Actor in Lotus
         run: |
-          cid=$(sed -n 's/^Actor Code CID: //p' output.txt)
+          cid=$(sed -n 's/^Actor Code CID: //p' install.txt)
           echo $cid
-          ~/lotus/lotus chain create-actor $cid >> output.txt
-          cat output.txt
+          lotus chain create-actor $cid >> create.txt
+          cat create.txt
       - name: Get status actor
         run: |
-          address=$(sed -n 's/^ID Address: //p' output.txt)
-          ~/lotus/lotus state get-actor $address
+          address=$(sed -n 's/^ID Address: //p' create.txt)
+          echo $address
+          lotus state get-actor $address >> actor.txt
+          cat actor.txt
+      - name: Get chain state
+        run: |
+          head=$(sed -n 's/^Head:		//p' actor.txt)
+          echo $head
+          lotus chain get $head
+      - name: Invoke actor's method 2
+        run: |
+          address=$(sed -n 's/^ID Address: //p' create.txt)
+          lotus chain invoke $address 2
+      - name: Get status actor
+        run: |
+          address=$(sed -n 's/^ID Address: //p' create.txt)
+          echo $address
+          rm actor.txt
+          lotus state get-actor $address >> actor.txt
+          cat actor.txt
+      - name: Get chain state
+        run: |
+          head=$(sed -n 's/^Head:		//p' actor.txt)
+          echo $head
+          lotus chain get $head
 ```
 
 To see an actual CI working, please go to the "Hello world" example to see how it is done.
@@ -180,7 +231,53 @@ To see an actual CI working, please go to the "Hello world" example to see how i
 ### Local Rust VM 
 The past two choices described have some trade-offs you should know. The devnet node will consume a lot of resources on your machine, as it is a full network working on itself (a miner is even active in order to allow the network to work).
 Because of that, you may want to limit how many resources the container can consume. The self-hosted runner won't take your precious resources, but it will require you to have a server up and running every time you want to run the CI.
-This cost money. The local rust VM is lightweight, can be run as many times as you want from scratch, and it takes almost no resources of your machine. **This option is under development yet, and it will be ready soon.**
+This cost money. The local rust VM is lightweight, can be run as many times as you want from scratch, and it takes almost no resources of your machine.
+
+
+```
+name: "Checks"
+on:
+  - push
+
+jobs:
+  build-test:
+    name: "Build and Test"
+    timeout-minutes: 5
+    runs-on: self-hosted
+    env:
+      VERDACCIO_TOKEN: ${{ secrets.VERDACCIO_READ_TOKEN }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.13.0'
+      - name: Install latest stable
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+      - name: Install yarn
+        run: npm install -g yarn
+      - name: Set npmrc
+        run: |
+          yarn config set @zondax:registry https://verdaccio.zondax.net/
+          npm config set //verdaccio.zondax.net/:_authToken "$VERDACCIO_TOKEN"
+          npm config set //verdaccio.zondax.net/:always-auth true
+      - name: Install dependencies
+        run: |
+          yarn install
+          make deps
+      - name: Build WASM file
+        run: make build
+      - name: Test WASM on Rust VM
+        run: |
+          cd testing
+          cargo r
+```
+
+To see an actual CI working, please go to the "Hello world" example to see how it is done.
 
 ## Use cases
 - [Hello world](https://github.com/Zondax/fil-hello-world-actor-as)
