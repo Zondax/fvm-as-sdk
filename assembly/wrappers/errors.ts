@@ -12,6 +12,7 @@ export function usrForbidden(): isize{
 export function usrIllegalState(): isize{
     return genericAbort(USR_ILLEGAL_STATE, "unable to get method number")
 }
+
 export function genericAbort(code: u32, msg: string):isize{
     const buff = String.UTF8.encode(msg)
     const dataPtr = changetype<isize>(buff)
