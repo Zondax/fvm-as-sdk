@@ -27,7 +27,9 @@
   "devDependencies": {
     "assemblyscript": "^0.20.4"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@zondax/assemblyscript-cbor": "^0.3.1"
+  },
   "files": [
     "assembly"
   ]
