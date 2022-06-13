@@ -21,7 +21,7 @@ jobs:
           npm config set //verdaccio.zondax.net/:_authToken "$VERDACCIO_TOKEN"
           npm config set //verdaccio.zondax.net/:always-auth true
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.VERDACCIO_READ_TOKEN }}
+          $VERDACCIO_TOKEN: ${{ secrets.VERDACCIO_READ_TOKEN }}
       - name: Install dependencies
         run: yarn install
       - name: Build WASM file
