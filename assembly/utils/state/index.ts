@@ -5,9 +5,9 @@ import {Cid, DAG_CBOR} from "../../env";
 import {Get, Put, root} from "../../helpers";
 import {setRoot} from "../../wrappers";
 
-export abstract class State{
-    abstract encode():ArrayBuffer
-    abstract parse(data:Value):State
+export abstract class BaseState{
+    protected abstract encode():ArrayBuffer
+    protected abstract parse(data:Value):BaseState
 
     // Function responsible to serialize state and save it to IPLD
     save(): Cid{
@@ -27,7 +27,7 @@ export abstract class State{
     }
 
     // Function used to load the state attached or related to this actor instance
-    load(): State{
+    protected load(): BaseState{
         // Get the block id related to this instance
         const readCid = root()
 
