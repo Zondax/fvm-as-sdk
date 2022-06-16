@@ -1,8 +1,11 @@
+import { BigInt } from "as-bigint/assembly"
+
 export type BlockId = u32;
 export type ActorID = u64
 export type MethodNum = u64
 export type Codec = u64
 export type ChainEpoch = i64
+export type TokenAmount = BigInt
 
 export class Send {
     constructor(
@@ -13,9 +16,10 @@ export class Send {
     ){}
 }
 
+/*
 export class TokenAmount{
     constructor(lo: u64, hi: u64) {}
-}
+}*/
 
 export class IpldOpen {
     constructor(
@@ -37,6 +41,6 @@ export class Cid {
 }
 
 export class InvocationContext {
-    constructor(public caller: ActorID, public receiver: ActorID, public method_number: MethodNum,
+    constructor(public value_received: TokenAmount , public caller: ActorID, public receiver: ActorID, public method_number: MethodNum,
                 public network_curr_epoch: ChainEpoch, public network_version: u32) {}
 }
