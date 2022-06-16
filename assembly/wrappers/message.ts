@@ -7,3 +7,7 @@ export function methodNumber(): u64{
 export function caller(): u64{
     return context().caller
 }
+
+export function receiver(): u64{
+    return context().receiver
+}
