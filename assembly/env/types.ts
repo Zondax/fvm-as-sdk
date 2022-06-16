@@ -16,11 +16,6 @@ export class Send {
     ){}
 }
 
-/*
-export class TokenAmount{
-    constructor(lo: u64, hi: u64) {}
-}*/
-
 export class IpldOpen {
     constructor(
         public Id: u32,
