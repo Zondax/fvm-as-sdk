@@ -36,6 +36,6 @@ export class Cid {
 }
 
 export class InvocationContext {
-    constructor(public value_received: TokenAmount , public caller: ActorID, public receiver: ActorID, public method_number: MethodNum,
+    constructor(public value_received: TokenAmount, public caller: ActorID, public receiver: ActorID, public method_number: MethodNum,
                 public network_curr_epoch: ChainEpoch, public network_version: u32) {}
 }
