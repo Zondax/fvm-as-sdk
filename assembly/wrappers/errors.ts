@@ -1,4 +1,4 @@
-import {USR_FORBIDDEN, USR_ILLEGAL_STATE, USR_UNHANDLED_MESSAGE} from "../env/errors";
+import {USR_FORBIDDEN, USR_ILLEGAL_STATE, USR_UNHANDLED_MESSAGE, USR_NOT_FOUND} from "../env/errors";
 import {vm} from "../env/sys/vm"
 
 export function usrUnhandledMsg(): isize{
