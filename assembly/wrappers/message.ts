@@ -37,7 +37,7 @@ export function paramsRaw(id: u32): ParamsRawResult{
         return new ParamsRawResult(DAG_CBOR, new Uint8Array(0)) // DAG_CBOR is a lie, but we have no nil codec.
     }
 
-    let respPtr = memory.data(sizeof<u64>() + sizeof<u32>)
+    let respPtr = memory.data(sizeof<u64>() + sizeof<u32>())
     let result = ipld.stat(respPtr, id)
     if (result != 0) {
         genericAbort(result, "fail to fetch parameters stat")
