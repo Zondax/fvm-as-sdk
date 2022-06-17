@@ -159,10 +159,10 @@ function <name-you-whish>(paramsID: u32):Uint8Array{
 And now, if you would go to call these methods from the node 
 ```
 # This one will not return anything
-lotus chain invoke 2
+lotus chain invoke t01001 2
 
 # This one will return a string 
-lotus chain invoke 3
+lotus chain invoke t01001 3
 ```
 
 ## How to run it? 
