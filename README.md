@@ -84,20 +84,86 @@ Most cases you will use this project as a building block to create more advanced
 do `yarn add fvm-as-sdk` to add it to your project. Then, you only need to import it using `import sdk from "fvm-as-sdk/assembly"`. All the functions will 
 be then available for you to use.
 
-## Smart contract building tips
-Please, refer to the "Hello World" example to see a working smart contract. You can use it as guidance or boilerplate to build your own smart contract.
-Here you have some lines about key functions related to a smart contract. 
+## How to build your own smart contracts?
+### Where do I start?
+The recommendation is to start reading these docs, and then go to the hello world example. You will find there some basics lines you could use 
+to understand how it works, and play with it.
 
-### Function `invoke`
-This is the entry point to any WASM code. Every time you run the code, this function will be called by default. From this func you should execute the correct function depending on the 
-method number the call has. 
+### What is BaseState class?
+The `BaseState` is an abstract class created to facilitate to read and write the data you want to preserve. In order to achieve this goal, you 
+just need to implement two functions: `encode` and `parse`. The first one is used to serialize data to **CBOR** (this is the format FVM uses to save data).
+The second one is used to parse serialized data to a new state with it. 
 
-### Function `constructor`
-This is the **method 1** by default. When you execute the `create-actor` command, this is going to be executed. At this stage you should create a new storage on the blockchain using IPLD. If you do 
-it, it will get attached to this specific instance. 
+### What is @zondax/fvm-as-bindgen?
+This package was created to make developers life easier. In order to make a smart contract work, there is a series of functions and lines of code strictly required by FVM. 
+However, they are not much related to what you really want to do when writing a new smart contract: your main purpose and nothing else. Therefore, taking advantage of 
+a strategic feature of AssemblyScript, we have created an automatic tool that will add those lines of code for you before compiling it. 
 
-### Function `<other-functions>`
-You will be able to call other functions by different method numbers. From two to n, you can match them on a switch in the invoke function.
+It implements a series of custom decorators you must use in order to indicate key points of your smart contract. 
+
+### What are those decorators for?
+Decorators are used to mark key places we need to be aware of in order to run some tasks on the smart contract code before compiling it to WASM (when building the code).
+Some of them are strictly required if you want your smart contract to work properly. 
+
+#### filecoinfile
+This one indicates which file is the main one. Here many pre compiling tasks will be performed. Any smart contract you write will require to have this decorator.
+But be careful, it won't allow you to have more than one. **This one is strictly required.**
+
+```
+// @filecoinfile
+
+....
+....
+....
+```
+
+#### constructor
+This one allows you to indicate which function will be called when creating new smart contract instances. If you don't use it, the smart contract
+will be instantiated anyway when running `create-actor` cmd. So what is it for? You will be able to set your initial state and save it on the blockchain.
+
+The function signature is 
+- ```function <name-you-whish>(paramsID: u32):void```
+
+As an example, you can check:
+```
+@constructor
+function <name-you-whish>(paramsID: u32):void{
+    // here you could create your initial state and save it on the blockchain
+    new State().save()
+}
+```
+
+#### export_method(num)
+This one allows you to indicate which function should be exported and visible to be called when invoking methods. If you create a function, but no decorator is set, you 
+won't be able to use it as a public method (callable from the outside world). This decorator accepts an argument. This argument will indicate the method number this function
+will be related to. **The number starts from 2, and they cannot be repeated.**
+
+The possible function signatures are
+
+- ```function <name-you-whish>(paramsID: u32):void```
+
+- ```function <name-you-whish>(paramsID: u32):Uint8Array```
+
+As an example, you can check:
+```
+@export_method(2)
+function <name-you-whish>(paramsID: u32):void{
+}
+
+@export_method(3)
+function <name-you-whish>(paramsID: u32):Uint8Array{
+    return Uint8Array.wrap(String.UTF8.encode("hello world"))
+}
+```
+
+And now, if you would go to call these methods from the node 
+```
+# This one will not return anything
+lotus chain invoke 2
+
+# This one will return a string 
+lotus chain invoke 3
+```
 
 ## How to run it? 
 First, you need to install your smart contract on the FVM. Once you have done it, you need to create an instance of it. You can create as many instances as you want. Each one will
@@ -281,6 +347,7 @@ To see an actual CI working, please go to the "Hello world" example to see how i
 
 ## Use cases
 - [Hello world](https://github.com/Zondax/fil-hello-world-actor-as)
+- [FNS](https://github.com/Zondax/fil-fns-actror-as)
 
 ## Docs
 Here you will find some useful links to every data source you can use to further increase your knowledge about different topics.
