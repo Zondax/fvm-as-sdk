@@ -36,9 +36,9 @@ export function paramsRaw(id: u32): ParamsRawResult{
     let respPtr = memory.data(sizeof<u64>() + sizeof<u32>())
     let result = ipld.stat(respPtr, id)
     if (result != 0) {
-        genericAbort(result, "fail to fetch parameters stat")
+        genericAbort(u32(result), "fail to fetch parameters stat")
     }
-    
+
     let pos = 0
     const codec = load<u64>(respPtr + pos)
     pos += sizeof<u64>()
