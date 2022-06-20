@@ -14,7 +14,7 @@ export function usrIllegalState(): isize{
 }
 
 export function usrNotFound(): isize{
-    return genericAbort(USR_NOT_FOUND, "ressource not found")
+    return genericAbort(USR_NOT_FOUND, "resource not found")
 }
 
 export function genericAbort(code: u32, msg: string):isize{

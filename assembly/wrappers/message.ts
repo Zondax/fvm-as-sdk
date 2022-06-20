@@ -1,5 +1,5 @@
 import {context} from "./vm"
-import {TokenAmount, ChainEpoch, NO_DATA_BLOCK_ID, DAG_CBOR, Codec} from "../env"
+import {TokenAmount, ChainEpoch, NO_DATA_BLOCK_ID, DAG_CBOR, ParamsRawResult} from "../env"
 import {ipld} from "../env/sys/ipld"
 import {genericAbort} from "./errors"
 import {GetBlock} from "../helpers"
@@ -26,10 +26,6 @@ export function currentEpoch(): ChainEpoch{
 
 export function networkVer(): u32{
     return context().network_version
-}
-
-export class ParamsRawResult {
-    constructor (public c: Codec, public raw: Uint8Array) {}
 }
 
 export function paramsRaw(id: u32): ParamsRawResult{

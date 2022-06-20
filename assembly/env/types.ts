@@ -39,3 +39,7 @@ export class InvocationContext {
     constructor(public value_received: TokenAmount, public caller: ActorID, public receiver: ActorID, public method_number: MethodNum,
                 public network_curr_epoch: ChainEpoch, public network_version: u32) {}
 }
+
+export class ParamsRawResult {
+    constructor (public c: Codec, public raw: Uint8Array) {}
+}
