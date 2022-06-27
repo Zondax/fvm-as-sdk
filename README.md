@@ -122,12 +122,12 @@ This one allows you to indicate which function will be called when creating new 
 will be instantiated anyway when running `create-actor` cmd. So what is it for? You will be able to set your initial state and save it on the blockchain.
 
 The function signature is 
-- ```function <name-you-whish>(paramsID: u32):void```
+- ```function <name-you-whish>(params: ParamsRawResult):void```
 
 As an example, you can check:
 ```
 @constructor
-function <name-you-whish>(paramsID: u32):void{
+function <name-you-whish>(params: ParamsRawResult):void{
     // here you could create your initial state and save it on the blockchain
     new State().save()
 }
@@ -140,18 +140,18 @@ will be related to. **The number starts from 2, and they cannot be repeated.**
 
 The possible function signatures are
 
-- ```function <name-you-whish>(paramsID: u32):void```
+- ```function <name-you-whish>(params: ParamsRawResult):void```
 
-- ```function <name-you-whish>(paramsID: u32):Uint8Array```
+- ```function <name-you-whish>(params: ParamsRawResult):Uint8Array```
 
 As an example, you can check:
 ```
 @export_method(2)
-function <name-you-whish>(paramsID: u32):void{
+function <name-you-whish>(params: ParamsRawResult):void{
 }
 
 @export_method(3)
-function <name-you-whish>(paramsID: u32):Uint8Array{
+function <name-you-whish>(params: ParamsRawResult):Uint8Array{
     return Uint8Array.wrap(String.UTF8.encode("hello world"))
 }
 ```
@@ -165,6 +165,23 @@ lotus chain invoke t01001 2
 lotus chain invoke t01001 3
 ```
 
+### How do I receive arguments when invoking a method?
+Data send when a method is invoked will be received as a UInt8Array. You can parse it to get values sent. For example, if you send 
+CBOR encoded data, then you can use CBORDecoder class to get original values. 
+
+```
+@export_method(3)
+function <name-you-whish>(params: ParamsRawResult):Uint8Array{
+    if( params.raw.byteLength > 0 ){
+        const decoder = new CBORDecoder(params.raw)
+        const parsedParams = decoder.parse()
+        
+        ....
+    }
+    
+    throw new Error("params not present")
+}
+```
 ## How to run it? 
 First, you need to install your smart contract on the FVM. Once you have done it, you need to create an instance of it. You can create as many instances as you want. Each one will
 live in its own storage space. Finally, you will be able to invoke methods the smart contract has.
