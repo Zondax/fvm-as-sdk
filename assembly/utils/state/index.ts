@@ -6,6 +6,7 @@ import {Get, Put, root} from "../../helpers";
 import {setRoot} from "../../wrappers";
 
 export abstract class BaseState{
+    protected abstract encode():ArrayBuffer
     protected abstract parse(data:Value):BaseState
 
     // Function responsible to serialize state and save it to IPLD
