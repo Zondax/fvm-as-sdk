@@ -7,9 +7,9 @@ export function create(codec: u64, data: Uint8Array ): u32 {
     const dataPtr = changetype<usize>(data.dataStart)
     const dataLen = data.length
 
-    if(ipld.create(respPtr, codec, dataPtr, dataLen) != 0){
-        genericAbort(USR_ILLEGAL_STATE, "failed to create new block")
-        return 0
+    const err = ipld.create(respPtr, codec, dataPtr, dataLen)
+    if(err != 0){
+        genericAbort(u32(err), "failed to create new block")
     }
 
     return load<u32>(respPtr)
@@ -20,9 +20,9 @@ export function cid(id: u32, hash_fun: u64, hash_len: u32, cidBuf: Uint8Array): 
     const cidBufPtr = changetype<usize>(cidBuf.dataStart)
     const cidBufLen = cidBuf.length
 
-    if(ipld.cid(respPtr, id, hash_fun, hash_len, cidBufPtr, cidBufLen) != 0){
-        genericAbort(USR_ILLEGAL_STATE, "failed to compute new CID")
-        return 0
+    const err = ipld.cid(respPtr, id, hash_fun, hash_len, cidBufPtr, cidBufLen)
+    if(err != 0){
+        genericAbort(u32(err), "failed to compute new CID")
     }
 
     return load<u32>(respPtr)
@@ -34,9 +34,9 @@ export function read(id: u32, offset: u32, buf:Uint8Array): u32 {
     const dataPtr = changetype<usize>(buf.dataStart)
     const dataLen = buf.length
 
-    if(ipld.read(respPtr, id, offset, dataPtr, dataLen) != 0){
-        genericAbort(USR_ILLEGAL_STATE, "failed to read block from CID")
-        return 0
+    const err = ipld.read(respPtr, id, offset, dataPtr, dataLen)
+    if (err != 0){
+        genericAbort(u32(err), `failed to read block from CID`)
     }
 
     return load<u32>(respPtr)
@@ -45,8 +45,10 @@ export function read(id: u32, offset: u32, buf:Uint8Array): u32 {
 export function stat(id: u32): IpldStat {
     const respPtr = memory.data(sizeof<Codec>() + sizeof<u32>()) // Codec + Size
 
-    // TODO Check if ipld.create func ran successfully
-    ipld.stat(respPtr, id)
+    const err = ipld.stat(respPtr, id)
+    if (err != 0) {
+        genericAbort(u32(err), `failed to get block stat from ID (${id})`)
+    }
 
     const codec: u64 = load<u64>(respPtr)
     const size: u32 = load<u32>(respPtr + sizeof<u64>())
@@ -59,9 +61,9 @@ export function open(id: Uint8Array): IpldOpen {
     const respPtr = memory.data(sizeof<Codec>() + sizeof<u32>() + sizeof<u32>()) // Id + Codec + Size
     const dataPtr = changetype<usize>(id.dataStart)
 
-    if(ipld.open(respPtr, dataPtr) != 0){
-        genericAbort(USR_ILLEGAL_STATE, "failed to open CID")
-        return new IpldOpen(0, 0, 0)
+    const err = ipld.open(respPtr, dataPtr)
+    if(err != 0){
+        genericAbort(u32(err), "failed to open CID")
     }
 
     let pos = 0

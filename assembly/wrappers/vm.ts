@@ -7,6 +7,7 @@ export function context(): InvocationContext {
         + sizeof<ActorID>()
         + sizeof<ChainEpoch>() + sizeof<ActorID>() + sizeof<u32>())
 
+    // No error
     vm.context(respPtr)
 
     let pos = 0

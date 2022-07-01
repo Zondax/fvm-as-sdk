@@ -10,7 +10,6 @@ export function send(recipient: Uint8Array, method: u64, params: u32, value_hi: 
     const err = sendSyscall.send(respPtr, recipientPtr, recipientLen, method, params, value_hi, value_lo)
     if (err != 0) {
         genericAbort(u32(err), "failed to send transaction")
-        return new Send(0,0,0,0)
     }
 
     let pos = 0
