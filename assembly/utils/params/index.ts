@@ -1,6 +1,7 @@
-import {ParamsRawResult} from "../../env";
 import {Value} from "@zondax/assemblyscript-cbor/assembly/types";
 import {CBORDecoder} from "@zondax/assemblyscript-cbor/assembly";
+
+import {ParamsRawResult} from "../../env";
 
 export function decodeParamsRaw(params: ParamsRawResult): Value{
     if( !(params.raw.byteLength > 0) ) return Value.Array()

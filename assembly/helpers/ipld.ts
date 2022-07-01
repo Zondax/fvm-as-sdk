@@ -3,7 +3,7 @@
 /// the actor's state-tree before the end of the current invocation.
 import {cid, create, open, read} from "../wrappers";
 import {Cid, MAX_CID_LEN} from "../env";
-import {cast} from "../utils/cid/multihash";
+import {cast} from "../utils";
 
 export function Put(mh_code: u64, mh_size: u32, codec: u64, data: Uint8Array): Cid {
     const id = create(codec, data)
