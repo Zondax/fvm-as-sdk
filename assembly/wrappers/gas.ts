@@ -8,6 +8,5 @@ export function charge(name: Uint8Array, amount: u64 ): void {
     const err = gas.charge(namePtr, nameLen, amount)
     if (err != 0) {
         genericAbort(u32(err), "failed to charge gas")
-        throw new Error("failed to charge gas")
     }
 }

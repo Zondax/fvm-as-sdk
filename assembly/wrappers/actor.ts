@@ -10,7 +10,6 @@ export function resolve_address(address: Uint8Array ): u64 {
     const err = actor.resolve_address(respPtr, addressPtr, addressLen)
     if (err != 0) {
         genericAbort(u32(err), `failed to resolve address (${address})`)
-        throw new Error(`failed to resolve address (${address})`)
     }
 
     return load<u64>(respPtr)
@@ -26,7 +25,6 @@ export function get_actor_code_cid(id: u64, obuf: Uint8Array): u32 {
     const err = actor.get_actor_code_cid(respPtr, id, obufPtr, obufLen)
     if (err != 0) {
         genericAbort(u32(err), "failed to get actor code cid")
-        throw new Error("failed to get actor code cid")
     }
 
     return load<u32>(respPtr)
@@ -40,7 +38,6 @@ export function get_builtin_actor_type(cid: Uint8Array): i32 {
     const err = actor.get_builtin_actor_type(respPtr, cidPtr)
     if (err != 0) {
         genericAbort(u32(err), "failed to get builtin actor type")
-        throw new Error("failed to get builtin actor type")
     }
 
     return load<i32>(respPtr)
@@ -54,7 +51,6 @@ export function get_code_cid_for_type(typ: i32, obuf: Uint8Array): u32 {
     const err = actor.get_code_cid_for_type(respPtr, typ, obufPtr, obufLen)
     if (err != 0) {
         genericAbort(u32(err), "failed to get code cid for type")
-        throw new Error("failed to get code cid for type")
     }
 
     return load<u32>(respPtr)
@@ -70,7 +66,6 @@ export function new_actor_address(obuf: Uint8Array): u32 {
     const err = actor.new_actor_address(respPtr, obufPtr, obufLen)
     if (err != 0) {
         genericAbort(u32(err), "failed to create new actor address")
-        throw new Error("failed to create new actor address")
     }
 
     return load<u32>(respPtr)
@@ -82,7 +77,6 @@ export function create_actor(id:u64, obuf: Uint8Array): void {
     const err = actor.create_actor(id, obufPtr)
     if (err != 0) {
         genericAbort(u32(err), "failed to create new actor")
-        throw new Error("failed to create new actor")
     }
 }
 
