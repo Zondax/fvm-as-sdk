@@ -17,7 +17,6 @@ export function root(cidBuf: Uint8Array): usize {
 
     if(self.root(msgPrt, dataPtr, dataLen) != 0){
         genericAbort(USR_SERIALIZATION, "unexpected error from `self::root` syscall")
-        return 0
     }
 
     return load<usize>(msgPrt)

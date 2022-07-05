@@ -34,9 +34,9 @@ export function paramsRaw(id: u32): ParamsRawResult{
     }
 
     let respPtr = memory.data(sizeof<u64>() + sizeof<u32>())
-    let result = ipld.stat(respPtr, id)
-    if (result != 0) {
-        genericAbort(u32(result), "fail to fetch parameters stat")
+    let err = ipld.stat(respPtr, id)
+    if (err != 0) {
+        genericAbort(u32(err), "fail to fetch parameters stat")
     }
 
     let pos = 0

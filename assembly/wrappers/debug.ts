@@ -10,7 +10,7 @@ export function enabled(): i32 {
 export function log(message:string): void {
     const buff = String.UTF8.encode(message)
     const messagePrt = changetype<usize>(buff)
-    const messageLen = messagePrt.length
+    const messageLen = buff.byteLength
 
     debug.log(messagePrt, messageLen)
 }
