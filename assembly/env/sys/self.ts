@@ -35,7 +35,7 @@ export namespace self{
     /// | [`IllegalOperation`] | actor has been deleted                         |
     /// | [`NotFound`]         | specified root CID is not in the reachable set |
     @external("self", "set_root")
-    export declare function set_root(cid: isize):isize;
+    export declare function setRoot(cid: isize):isize;
 
     /// Gets the current balance for the calling actor.
     ///
@@ -43,7 +43,7 @@ export namespace self{
     ///
     /// None.
     @external("self", "current_balance")
-    export declare function current_balance(resp_ptr: isize) :isize;
+    export declare function currentBalance(resp_ptr: isize) :isize;
 
     /// Destroys the calling actor, sending its current balance
     /// to the supplied address, which cannot be itself.
@@ -61,5 +61,5 @@ export namespace self{
     /// | [`Forbidden`]       | beneficiary is not allowed (usually means beneficiary is self) |
     /// | [`IllegalArgument`] | if the passed address buffer isn't valid, in memory, etc.      |
     @external("self", "self_destruct")
-    export declare function self_destruct(addr_off: isize, addr_len: u32) : isize;
+    export declare function selfDestruct(addr_off: isize, addr_len: u32) : isize;
 }

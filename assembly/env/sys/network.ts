@@ -10,7 +10,7 @@ export namespace network{
     ///
     /// None
     @external("network", "base_fee")
-    export declare function base_fee(respPtr: isize): isize;
+    export declare function baseFee(respPtr: isize): isize;
 
     /// Gets the circulating supply.
     ///
@@ -18,5 +18,5 @@ export namespace network{
     ///
     /// None
     @external("network", "total_fil_circ_supply")
-    export declare function total_fil_circ_supply(respPtr: isize): isize;
+    export declare function totalFilCircSupply(respPtr: isize): isize;
 }

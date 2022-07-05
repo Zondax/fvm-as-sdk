@@ -2,7 +2,7 @@ import {CBORDecoder} from "@zondax/assemblyscript-cbor/assembly"
 import {Value} from "@zondax/assemblyscript-cbor/assembly/types"
 
 import {Cid, DAG_CBOR} from "../../env";
-import {Get, Put, root} from "../../helpers";
+import {get, put, root} from "../../helpers";
 import {setRoot} from "../../wrappers";
 
 export abstract class BaseState{
@@ -16,7 +16,7 @@ export abstract class BaseState{
 
         // Create a new block on IPLD with serialized data
         // It returns the id of that new block
-        const stCid = Put(0xb220, 32, DAG_CBOR, encodedData)
+        const stCid = put(0xb220, 32, DAG_CBOR, encodedData)
 
         // setRoot allows to attach that new block to the actor instance that is running
         // If this is not done, the block won't be related to this actor, and it won't be able
@@ -32,7 +32,7 @@ export abstract class BaseState{
         const readCid = root()
 
         // Using that id, get the block and read the serialized data
-        const ipldData = Get(readCid)
+        const ipldData = get(readCid)
 
         // Use CBORDecoder to CBOR data into an object
         const decoder = new CBORDecoder(ipldData.buffer)

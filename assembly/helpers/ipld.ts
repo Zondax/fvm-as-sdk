@@ -5,7 +5,7 @@ import {cid, create, open, read} from "../wrappers";
 import {Cid, MAX_CID_LEN} from "../env";
 import {cast} from "../utils";
 
-export function Put(mh_code: u64, mh_size: u32, codec: u64, data: Uint8Array): Cid {
+export function put(mh_code: u64, mh_size: u32, codec: u64, data: Uint8Array): Cid {
     const id = create(codec, data)
 
     const buf = new Uint8Array(MAX_CID_LEN)
@@ -14,12 +14,12 @@ export function Put(mh_code: u64, mh_size: u32, codec: u64, data: Uint8Array): C
     return cast(buf)
 }
 
-export function Get(cidVal: Cid): Uint8Array {
+export function get(cidVal: Cid): Uint8Array {
     const result = open(cidVal.raw)
-    return GetBlock(result.Id, result.Size)
+    return getBlock(result.Id, result.Size)
 }
 
-export function GetBlock(id: u32, size: u32): Uint8Array {
+export function getBlock(id: u32, size: u32): Uint8Array {
     const block = new Uint8Array(size)
     const bytesRead = read(id, 0, block)
     return block
