@@ -5,7 +5,7 @@ import {genericAbort} from "./errors";
 export function setRoot(id: Cid): void {
     const dataPtr = changetype<usize>(id.raw.dataStart)
 
-    if(self.set_root(dataPtr) != 0){
+    if(self.setRoot(dataPtr) != 0){
         genericAbort(USR_ILLEGAL_STATE, "failed to set root CID")
     }
 }

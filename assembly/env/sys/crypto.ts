@@ -21,7 +21,7 @@ export namespace crypto{
     /// | [`NotFound`]        | the signer's address could not be resolved           |
     /// | [`IllegalArgument`] | signature, address, or plaintext buffers are invalid |
     @external("crypto", "verify_signature")
-    export declare function verify_signature(
+    export declare function verifySignature(
         respPtr: isize,
         sig_type: u32,
         sig_off: isize,
@@ -50,7 +50,7 @@ export namespace crypto{
     /// |---------------------|-------------------------------------------------|
     /// | [`IllegalArgument`] | the input buffer does not point to valid memory |
     @external("crypto", "hash")
-    export declare function hash_blake2b(
+    export declare function hashBlake2b(
         respPtr:isize,
         hash_code: u64,
         data_off: isize,
@@ -81,7 +81,7 @@ export namespace crypto{
     /// | [`IllegalArgument`] | an argument is malformed                               |
     /// | [`BufferTooSmall`]  | if the output buffer isn't large enough to fit the CID |
     @external("crypto", "compute_unsealed_sector_cid")
-    export declare function compute_unsealed_sector_cid(
+    export declare function computeUnsealedSectorCID(
         resp_off: isize,
         proof_type: i64,
         pieces_off: isize,
@@ -105,7 +105,7 @@ export namespace crypto{
     /// |---------------------|--------------------------|
     /// | [`IllegalArgument`] | an argument is malformed |
     @external("crypto", "verify_seal")
-    export declare function verify_seal(resp_ptr:isize, info_off: isize, info_len: u32) :isize;
+    export declare function verifySeal(resp_ptr:isize, info_off: isize, info_len: u32) :isize;
 
     /// Verifies a window proof of spacetime.
     ///
@@ -122,7 +122,7 @@ export namespace crypto{
     /// |---------------------|--------------------------|
     /// | [`IllegalArgument`] | an argument is malformed |
     @external("crypto", "verify_post")
-    export declare function verify_post(resp_ptr:isize, info_off: isize, info_len: u32) :isize;
+    export declare function verifyPost(resp_ptr:isize, info_off: isize, info_len: u32) :isize;
 
     /// Verifies that two block headers provide proof of a consensus fault.
     ///
@@ -144,7 +144,7 @@ export namespace crypto{
     /// | [`LimitExceeded`]   | exceeded lookback limit finding block |
     /// | [`IllegalArgument`] | an argument is malformed              |
     @external("crypto", "verify_consensus_fault")
-    export declare function verify_consensus_fault(
+    export declare function verifyConsensusFault(
         resp_ptr: isize,
         h1_off: isize,
         h1_len: u32,
@@ -171,7 +171,7 @@ export namespace crypto{
     /// | [`LimitExceeded`]   | exceeds seal aggregation limit |
     /// | [`IllegalArgument`] | an argument is malformed       |
     @external("crypto", "verify_aggregate_seals")
-    export declare function verify_aggregate_seals(resp_ptr:isize, agg_off: isize, agg_len: u32) :isize;
+    export declare function verifyAggregateSeals(resp_ptr:isize, agg_off: isize, agg_len: u32) :isize;
 
     /// Verifies a replica update proof.
     ///
@@ -189,7 +189,7 @@ export namespace crypto{
     /// | [`LimitExceeded`]   | exceeds replica update limit  |
     /// | [`IllegalArgument`] | an argument is malformed      |
     @external("crypto", "verify_replica_update")
-    export declare function verify_replica_update(resp_ptr: isize, rep_off: isize, rep_len: u32) :isize;
+    export declare function verifyReplicaUpdate(resp_ptr: isize, rep_off: isize, rep_len: u32) :isize;
 
     /// Verifies a batch of sector seal proofs.
     ///
@@ -208,5 +208,5 @@ export namespace crypto{
     /// |---------------------|--------------------------|
     /// | [`IllegalArgument`] | an argument is malformed |
     @external("crypto", "batch_verify_seals")
-    export declare function batch_verify_seals(batch_off: isize, batch_len: u32, result_off: isize): isize;
+    export declare function batchVerifySeals(batch_off: isize, batch_len: u32, result_off: isize): isize;
 }

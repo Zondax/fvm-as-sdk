@@ -1,22 +1,22 @@
 import {network} from "../env/sys/network";
 import {TokenAmount} from "../env";
 
-export function base_fee(): TokenAmount {
+export function baseFee(): TokenAmount {
     const respPtr = memory.data(sizeof<u64>() + sizeof<u64>())
 
     // No error
-    network.base_fee(respPtr)
+    network.baseFee(respPtr)
 
     const lo = load<u64>(respPtr)
     const hi = load<u64>(respPtr + sizeof<u64>())
     return new TokenAmount(lo, hi)
 }
 
-export function total_fil_circ_supply(): TokenAmount {
+export function totalFilCircSupply(): TokenAmount {
     const respPtr = memory.data(sizeof<u64>() + sizeof<u64>())
 
     // No error
-    network.total_fil_circ_supply(respPtr)
+    network.totalFilCircSupply(respPtr)
 
     const lo = load<u64>(respPtr)
     const hi = load<u64>(respPtr + sizeof<u64>())

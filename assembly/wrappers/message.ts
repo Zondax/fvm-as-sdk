@@ -2,7 +2,7 @@ import {context} from "./vm"
 import {TokenAmount, ChainEpoch, NO_DATA_BLOCK_ID, DAG_CBOR, ParamsRawResult} from "../env"
 import {ipld} from "../env/sys/ipld"
 import {genericAbort} from "./errors"
-import {GetBlock} from "../helpers"
+import {getBlock} from "../helpers"
 
 export function methodNumber(): u64{
     return context().method_number
@@ -34,7 +34,7 @@ export function paramsRaw(id: u32): ParamsRawResult{
     }
 
     let respPtr = memory.data(sizeof<u64>() + sizeof<u32>())
-    let err = ipld.stat(respPtr, id)
+    let err = ipld.blockStat(respPtr, id)
     if (err != 0) {
         genericAbort(u32(err), "fail to fetch parameters stat")
     }
@@ -45,7 +45,7 @@ export function paramsRaw(id: u32): ParamsRawResult{
     const size = load<u32>(respPtr + pos)
 
 
-    const rawParam = GetBlock(id, size)
+    const rawParam = getBlock(id, size)
 
     return new ParamsRawResult(codec, rawParam)
 }

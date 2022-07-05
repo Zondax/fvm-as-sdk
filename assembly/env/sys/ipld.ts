@@ -23,7 +23,7 @@ export namespace ipld{
     /// | [`NotFound`]        | the target block isn't in the reachable set |
     /// | [`IllegalArgument`] | there's something wrong with the CID        |
     @external("ipld", "block_open")
-    export declare function open(resp_ptr: isize, cid: isize) :isize;
+    export declare function blockOpen(resp_ptr: isize, cid: isize) :isize;
 
     /// Creates a new block, returning the block's ID. The block's children must be in the reachable
     /// set. The new block isn't added to the reachable set until the CID is computed.
@@ -43,7 +43,7 @@ export namespace ipld{
     /// | [`Serialization`]   | the passed block doesn't match the passed codec         |
     /// | [`IllegalArgument`] | the block isn't in memory, etc.                         |
     @external("ipld", "block_create")
-    export declare function create(resp_ptr:isize, codec: u64, data: isize, len: u32) :isize;
+    export declare function blockCreate(resp_ptr:isize, codec: u64, data: isize, len: u32) :isize;
 
 
     /// Reads the block identified by `id` into `obuf`, starting at `offset`, reading _at most_
@@ -74,7 +74,7 @@ export namespace ipld{
     /// | [`InvalidHandle`]   | if the handle isn't known.                        |
     /// | [`IllegalArgument`] | if the passed buffer isn't valid, in memory, etc. |
     @external("ipld", "block_read")
-    export declare function read(resp_ptr: isize, id: u32, offset: u32, obuf: isize, max_len: u32) :isize;
+    export declare function blockRead(resp_ptr: isize, id: u32, offset: u32, obuf: isize, max_len: u32) :isize;
 
     /// Returns the codec and size of the specified block.
     ///
@@ -84,7 +84,7 @@ export namespace ipld{
     /// |-------------------|----------------------------|
     /// | [`InvalidHandle`] | if the handle isn't known. |
     @external("ipld", "block_stat")
-    export declare function stat(resp_ptr: isize, id: u32):isize;
+    export declare function blockStat(resp_ptr: isize, id: u32):isize;
 
     // TODO: CID versions?
 
@@ -112,7 +112,7 @@ export namespace ipld{
     /// | [`IllegalCid`]      | hash code and/or hash length aren't supported.    |
     /// | [`IllegalArgument`] | if the passed buffer isn't valid, in memory, etc. |
     @external("ipld", "block_link")
-    export declare function cid(
+    export declare function blockLink(
         resp_ptr: isize,
         id: u32,
         hash_fun: u64,

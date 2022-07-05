@@ -20,7 +20,7 @@ export namespace rand{
     /// | [`LimitExceeded`]   | lookback exceeds limit. |
     /// | [`IllegalArgument`] | invalid buffer, etc.    |
     @external("rand", "get_chain_randomness")
-    export declare function get_chain_randomness(
+    export declare function getChainRandomness(
         resp_ptt: isize,
         tag: i64,
         epoch: i64,
@@ -45,7 +45,7 @@ export namespace rand{
     /// | [`LimitExceeded`]   | lookback exceeds limit. |
     /// | [`IllegalArgument`] | invalid buffer, etc.    |
     @external("rand", "get_beacon_randomness")
-    export declare function get_beacon_randomness(
+    export declare function getBeaconRandomness(
         resp_ptr: isize,
         tag: i64,
         epoch: i64,
