@@ -52,6 +52,6 @@ export class Address {
         genericAbort(USR_ILLEGAL_ARGUMENT, `Unknown protocol (${protocol} is not a valid address protocol).`)
     }
 
-    return Address(protocol, payload)
+    return new Address(protocol, payload)
   }
 }
