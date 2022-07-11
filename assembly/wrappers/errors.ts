@@ -1,8 +1,8 @@
 import {USR_FORBIDDEN, USR_ILLEGAL_STATE, USR_UNHANDLED_MESSAGE, USR_NOT_FOUND} from "../env/errors";
 import {vm} from "../env/sys/vm"
 
-export function usrUnhandledMsg(): void{
-    genericAbort(USR_UNHANDLED_MESSAGE, "unrecognized method")
+export function usrUnhandledMsg(methodNum: u32): void{
+    genericAbort(USR_UNHANDLED_MESSAGE, `unrecognized method (${methodNum})`)
 }
 
 export function usrForbidden(): void{
