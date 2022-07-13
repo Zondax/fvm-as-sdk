@@ -11,7 +11,7 @@ export class Send {
     constructor(
         public exit_code: u32,
         public return_id: BlockId,
-        public return_codec: u64,
+        public return_codec: Codec,
         public return_size: u32,
     ){}
 }
