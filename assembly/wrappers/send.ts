@@ -1,28 +1,34 @@
-import {send as sendSyscall} from "../env/sys/send";
-import {ActorID, BlockId, Send} from "../env";
+import {send as sendSyscall} from "../env/sys/send"
+import { create } from "./ipld"
+import {Codec, BlockId, Send, DAG_CBOR, NO_DATA_BLOCK_ID} from "../env"
 import {genericAbort} from "./errors"
 
-export function send(recipient: Uint8Array, method: u64, params: u32, value_hi: u64, value_lo: u64): Send{
+export function send(recipient: Uint8Array, method: u64, params: Uint8Array, value_hi: u64, value_lo: u64): Send{
     const respPtr = memory.data(sizeof<u32>() + sizeof<BlockId>() + sizeof<u64>() + sizeof<u32>())
     const recipientPtr = changetype<usize>(recipient.dataStart)
     const recipientLen = recipient.byteLength
 
-    const err = sendSyscall.send(respPtr, recipientPtr, recipientLen, method, params, value_hi, value_lo)
+    let paramsID: u32 = NO_DATA_BLOCK_ID
+    if (params.byteLength !== 0 ) {
+        paramsID = create(DAG_CBOR, params)
+    }
+
+    const err = sendSyscall.send(respPtr, recipientPtr, recipientLen, method, paramsID, value_hi, value_lo)
     if (err != 0) {
         genericAbort(u32(err), "failed to send transaction")
     }
 
     let pos = 0
-    const exit_code: u64 = load<u32>(respPtr + pos)
-    pos += sizeof<u64>()
+    const exit_code: u32 = load<u32>(respPtr + pos)
+    pos += sizeof<u32>()
 
-    const return_id: u64 = load<BlockId>(respPtr + pos)
-    pos += sizeof<u64>()
+    const return_id: BlockId = load<BlockId>(respPtr + pos)
+    pos += sizeof<BlockId>()
 
-    const return_codec: ActorID = load<u64>(respPtr + pos)
-    pos += sizeof<ActorID>()
+    const return_codec: Codec = load<Codec>(respPtr + pos)
+    pos += sizeof<Codec>()
 
-    const return_size: ActorID = load<u32>(respPtr + pos)
+    const return_size: u32 = load<u32>(respPtr + pos)
 
     return new Send(exit_code, return_id, return_codec, return_size)
 }
