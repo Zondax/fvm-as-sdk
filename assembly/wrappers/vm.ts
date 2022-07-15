@@ -1,4 +1,4 @@
-import { BigInt } from "as-bigint/assembly";
+import { u128 } from "as-bignum/assembly";
 import {TokenAmount, MethodNum, ActorID, ChainEpoch, InvocationContext} from "../env";
 import {vm} from "../env/sys/vm";
 
@@ -32,7 +32,7 @@ export function context(): InvocationContext {
     const networkVer: u32 = load<u32>(respPtr + pos)
 
     // hacky
-    const valueReceived: TokenAmount = BigInt.fromString(tokenAmountHi.toString(16)+tokenAmountLo.toString(16), 16)
+    const valueReceived: TokenAmount = new u128(tokenAmountHi, tokenAmountLo)
 
     const resp: InvocationContext = new InvocationContext(valueReceived, caller, receiver, methodNum, currentEpoch, networkVer)
 

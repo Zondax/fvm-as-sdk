@@ -1,11 +1,11 @@
-import { BigInt } from "as-bigint/assembly"
+import { u128 } from "as-bignum/assembly";
 
 export type BlockId = u32;
 export type ActorID = u64
 export type MethodNum = u64
 export type Codec = u64
 export type ChainEpoch = i64
-export type TokenAmount = BigInt
+export type TokenAmount = u128
 
 export class Send {
     constructor(

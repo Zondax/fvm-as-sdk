@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@zondax/assemblyscript-cbor": "^0.5.0",
-    "as-bigint": "^0.5.3"
+    "as-bignum": "^0.2.18"
   },
   "files": [
     "assembly"
