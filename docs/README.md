@@ -100,21 +100,9 @@ It implements a series of custom decorators you must use in order to indicate ke
 
 ### What are those decorators for?
 Decorators are used to mark key places we need to be aware of in order to run some tasks on the smart contract code before compiling it to WASM (when building the code).
-Some of them are strictly required if you want your smart contract to work properly. 
+Some of them are strictly required if you want your smart contract to work properly.
 
-#### filecoinfile
-This one indicates which file is the main one. Here many pre compiling tasks will be performed. Any smart contract you write will require to have this decorator.
-But be careful, it won't allow you to have more than one. **This one is strictly required.**
-
-```
-// @filecoinfile
-
-....
-....
-....
-```
-
-#### constructor
+#### @constructor
 This one allows you to indicate which function will be called when creating new smart contract instances. If you don't use it, the smart contract
 will be instantiated anyway when running `create-actor` cmd. So what is it for? You will be able to set your initial state and save it on the blockchain.
 
@@ -130,7 +118,7 @@ function <name-you-whish>(params: ParamsRawResult):void{
 }
 ```
 
-#### export_method(num)
+#### @export_method(num)
 This one allows you to indicate which function should be exported and visible to be called when invoking methods. If you create a function, but no decorator is set, you 
 won't be able to use it as a public method (callable from the outside world). This decorator accepts an argument. This argument will indicate the method number this function
 will be related to. **The number starts from 2, and they cannot be repeated.**
@@ -162,6 +150,22 @@ lotus chain invoke t01001 2
 lotus chain invoke t01001 3
 ```
 
+#### @state
+This one allows you to indicate which class will be used as recipient to persist data on storage. 
+**This is strictly required to be present. If it is not there, an error will be thrown.**
+
+The function signature is
+- ```class <name-you-whish> extends BaseState{ }```
+
+As an example, you can check:
+```
+@state
+class State extends BaseState{
+   count: u64 = 0
+   msg: string = "base example"
+}
+```
+
 ### How do I receive arguments when invoking a method?
 Data send when a method is invoked will be received as a UInt8Array. You can parse it to get values sent. For example, if you send 
 CBOR encoded data, then you can use CBORDecoder class to get original values. 
@@ -183,7 +187,7 @@ function <name-you-whish>(params: ParamsRawResult):Uint8Array{
 First, you need to install your smart contract on the FVM. Once you have done it, you need to create an instance of it. You can create as many instances as you want. Each one will
 live in its own storage space. Finally, you will be able to invoke methods the smart contract has.
 
-![commands-sequence.png](docs/files/commands-sequence.png)
+![commands-sequence.png](files/commands-sequence.png)
 
 ### Small cheat sheet 
 Here you can find a small list of the commands you can run, and how you can get the inputs you need to run them.
