@@ -155,6 +155,22 @@ function say_hello(): string {
 - `State.load()` is a static function, meant to read from storage data saved previously and creates a new instance of the class with those values.
 - `save` function is used to persist the current values on storage.
 
+## Throwing errors
+In order to make errors easy to generate, the SDK has some helper functions. If you want to throw an error in some point during execution, you can
+use `genericAbort` function. You will need to indicate some error code and a description message. Nothing more. 
+
+Some highlights:
+- There are some error codes defined by filecoin that you can use. All of them are defined in the SDK, under `"@zondax/fvm-as-sdk/assembly/env"`
+
+```typescript
+import {genericAbort} from "@zondax/fvm-as-sdk/assembly/wrappers";
+import {USR_ASSERTION_FAILED} from "@zondax/fvm-as-sdk/assembly/env";
+
+function example(): string {
+    genericAbort(USR_ASSERTION_FAILED, "message")
+}
+```
+
 ## Building your smart contract
 
 Whenever you want to build your code, it is super easy to do. Just run `make build`. The output will be written on `build/release.wasm`
