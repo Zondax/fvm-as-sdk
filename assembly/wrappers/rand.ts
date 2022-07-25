@@ -12,9 +12,13 @@ export function getChainRandomness(tag: i64, epoch: i64, entropy: Uint8Array ): 
         genericAbort(u32(err), "fail to get chain randomness")
     }
 
-    return load<Uint8Array>(respPtr)
-}
+    const response = new Uint8Array(RANDOMNESS_LENGTH)
+    for (let i: u32 = 0; i < u32(RANDOMNESS_LENGTH); i++) {
+        response[i] =  load<u8>(respPtr + (i*sizeof<u8>()))
+    }
 
+    return response
+}
 
 export function getBeaconRandomness(tag: i64, epoch: i64, entropy: Uint8Array ): Uint8Array {
     const respPtr = memory.data(RANDOMNESS_LENGTH * sizeof<u8>())
@@ -26,5 +30,10 @@ export function getBeaconRandomness(tag: i64, epoch: i64, entropy: Uint8Array ):
         genericAbort(u32(err), "fail to get beacon randomness")
     }
 
-    return load<Uint8Array>(respPtr)
+    const response = new Uint8Array(RANDOMNESS_LENGTH)
+    for (let i: u32 = 0; i < u32(RANDOMNESS_LENGTH); i++) {
+        response[i] =  load<u8>(respPtr + (i*sizeof<u8>()))
+    }
+
+    return response
 }
