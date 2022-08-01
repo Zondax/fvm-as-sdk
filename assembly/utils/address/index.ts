@@ -1,3 +1,5 @@
+import { CBOREncoder } from "@zondax/assemblyscript-cbor/assembly"
+import { Value, Arr, Integer, Bytes } from "@zondax/assemblyscript-cbor/assembly/types"
 import { genericAbort } from "../../wrappers/errors"
 import { USR_ILLEGAL_ARGUMENT } from "../../env/errors"
 
@@ -53,5 +55,27 @@ export class Address {
     }
 
     return new Address(protocol, payload)
+  }
+
+
+  static encode(encoder: CBOREncoder, toEncode: Address): void {
+    encoder.addArray(2)
+    encoder.addUint8(toEncode.protocol)
+    encoder.addBytes(toEncode.payload)
+  }
+
+
+  static parse(parsedData: Value): Address {
+    if( !parsedData.isArr ) throw new Error("serialized data on Address should be an array")
+    let values = (parsedData as Arr).valueOf()
+
+    const protocol = (values.at(0) as Integer).valueOf()
+    const payload = (values.at(1) as Bytes).valueOf()
+
+    return new Address(protocol, payload)
+  }
+
+  static defaultInstance(): Address {
+    return new Address(Protocol.ID, new Uint8Array(0) );
   }
 }
