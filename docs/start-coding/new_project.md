@@ -1,5 +1,6 @@
 ---
 title: "Creating a new project"
+sidebar_position: 1
 ---
 
 ### Pre requisites

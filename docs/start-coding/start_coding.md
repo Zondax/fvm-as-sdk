@@ -1,5 +1,6 @@
 ---
 title: "Start coding"
+sidebar_position: 2
 ---
 
 ### Creating state to storage data
