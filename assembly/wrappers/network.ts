@@ -1,6 +1,10 @@
 import {network} from "../env/sys/network";
 import {TokenAmount} from "../env";
 
+/**
+ * Returns base fee for network transactions 
+ * @returns fee
+ */
 export function baseFee(): TokenAmount {
     const respPtr = memory.data(sizeof<u64>() + sizeof<u64>())
 
@@ -12,6 +16,10 @@ export function baseFee(): TokenAmount {
     return new TokenAmount(lo, hi)
 }
 
+/**
+ * Returns amount of FIL in network
+ * @returns total FIL
+ */
 export function totalFilCircSupply(): TokenAmount {
     const respPtr = memory.data(sizeof<u64>() + sizeof<u64>())
 
