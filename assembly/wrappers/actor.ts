@@ -1,6 +1,12 @@
 import {actor} from "../env/sys/actor";
 import {genericAbort} from "./errors"
 
+/**
+ * Resolved robust wallet address to wallet ID on the network
+ * 
+ * @param address - The robust address for the wallet
+ * @returns wallet ID (number - u64)
+ */
 export function resolveAddress(address: Uint8Array ): u64 {
     const respPtr = memory.data(sizeof<u64>())
     const addressPtr = changetype<usize>(address.dataStart)
@@ -15,7 +21,12 @@ export function resolveAddress(address: Uint8Array ): u64 {
     return load<u64>(respPtr)
 }
 
-
+/**
+ * Get actor id on the network
+ * @param id 
+ * @param obuf 
+ * @returns actorCID
+ */
 export function getActorCodeCID(id: u64, obuf: Uint8Array): u32 {
     const respPtr = memory.data(sizeof<u32>())
     const obufPtr = changetype<usize>(obuf.dataStart)
@@ -30,6 +41,10 @@ export function getActorCodeCID(id: u64, obuf: Uint8Array): u32 {
     return load<u32>(respPtr)
 }
 
+/**
+ * Returns built in actor type
+ * @param cid actor id
+ */
 export function getBuiltinActorType(cid: Uint8Array): i32 {
     const respPtr = memory.data(sizeof<i32>())
     const cidPtr = changetype<usize>(cid.dataStart)
@@ -43,6 +58,12 @@ export function getBuiltinActorType(cid: Uint8Array): i32 {
     return load<i32>(respPtr)
 }
 
+/**
+ * Returns code cid for actor type 
+ * @param typ - actor type
+ * @param obuf 
+ * @returns codeCID
+ */
 export function getCodeCIDForType(typ: i32, obuf: Uint8Array): u32 {
     const respPtr = memory.data(sizeof<u32>())
     const obufPtr = changetype<usize>(obuf.dataStart)
@@ -58,6 +79,11 @@ export function getCodeCIDForType(typ: i32, obuf: Uint8Array): u32 {
 
 /***** Priviledge *****/
 
+/**
+ * Returns new actor address [Priviledged]
+ * @param obuf 
+ * @returns address of new actor
+ */
 export function newActorAddress(obuf: Uint8Array): u32 {
     const respPtr = memory.data(sizeof<u32>())
     const obufPtr = changetype<usize>(obuf.dataStart)
@@ -71,6 +97,11 @@ export function newActorAddress(obuf: Uint8Array): u32 {
     return load<u32>(respPtr)
 }
 
+/**
+ * Create new actor on fvm [Priviledged]
+ * @param id codeCID
+ * @param obuf 
+ */
 export function createActor(id:u64, obuf: Uint8Array): void {
     const obufPtr = changetype<usize>(obuf.dataStart)
 

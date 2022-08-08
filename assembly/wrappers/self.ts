@@ -2,6 +2,10 @@ import {Cid, USR_SERIALIZATION, USR_ILLEGAL_STATE} from "../env";
 import {self} from "../env/sys/self";
 import {genericAbort} from "./errors";
 
+/**
+ * Set the actor's state-tree root
+ * @param id root id
+ */
 export function setRoot(id: Cid): void {
     const dataPtr = changetype<usize>(id.raw.dataStart)
 
@@ -9,7 +13,12 @@ export function setRoot(id: Cid): void {
         genericAbort(USR_ILLEGAL_STATE, "failed to set root CID")
     }
 }
-
+/**
+ * Returns the IPLD root CID. Fails if the actor doesn't have state (before the first call to
+ * `set_root` and after actor deletion).
+ * @param cidBuf 
+ * @returns 
+ */
 export function root(cidBuf: Uint8Array): usize {
     const msgPrt = memory.data(sizeof<usize>())
     const dataPtr = changetype<usize>(cidBuf.dataStart)

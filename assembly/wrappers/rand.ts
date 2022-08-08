@@ -2,6 +2,13 @@ import {rand} from "../env/sys/rand";
 import {RANDOMNESS_LENGTH} from "../env";
 import {genericAbort} from "./errors"
 
+/**
+ * Returns randomness from the ticket chain.
+ * @param tag Domain separation tag
+ * @param epoch chain epoch
+ * @param entropy 
+ * @returns randomness from ticket chain
+ */
 export function getChainRandomness(tag: i64, epoch: i64, entropy: Uint8Array ): Uint8Array {
     const respPtr = memory.data(RANDOMNESS_LENGTH * sizeof<u8>())
     const entropyPtr = changetype<usize>(entropy.dataStart)
@@ -20,6 +27,13 @@ export function getChainRandomness(tag: i64, epoch: i64, entropy: Uint8Array ): 
     return response
 }
 
+/**
+ * Returns randomness from the beacon system (currently Drand)
+ * @param tag Domain separation tag
+ * @param epoch chain epoch
+ * @param entropy 
+ * @returns 
+ */
 export function getBeaconRandomness(tag: i64, epoch: i64, entropy: Uint8Array ): Uint8Array {
     const respPtr = memory.data(RANDOMNESS_LENGTH * sizeof<u8>())
     const entropyPtr = changetype<usize>(entropy.dataStart)

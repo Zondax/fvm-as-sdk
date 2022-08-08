@@ -2,6 +2,10 @@ import { u128 } from "as-bignum/assembly";
 import {TokenAmount, MethodNum, ActorID, ChainEpoch, InvocationContext} from "../env";
 import {vm} from "../env/sys/vm";
 
+/**
+ * Invocation context for the actor method invoked
+ * @returns InvocationContext
+ */
 export function context(): InvocationContext {
     const respPtr = memory.data( sizeof<u64>()  + sizeof<u64>() +sizeof<MethodNum>()
         + sizeof<ActorID>()
