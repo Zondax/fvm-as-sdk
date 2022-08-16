@@ -4,8 +4,8 @@
 
 **The AssemblyScript SDK is the official SDK for writing FMV smart contracts using the AssemblyScript language.**
 
-This project aims to build the best developer environment for you to give your best on what matters: your business logic, 
-what you really want you to create on your smart contract.
+This project aims to build the best developer environment to allow you to do your best on what matters: the business logic of your project, 
+what you really want to create on your smart contract.
 
 
 ## Are you interested in learning more? :books::books: 
