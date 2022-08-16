@@ -7,7 +7,8 @@
 This project aims to build the best developer environment for you to give your best on what matters: your business logic, 
 what you really want you to create on your smart contract.
 
+---
 
-### Do you want to learn more? :books::books:
+## Interested in learning more? :books::books:
 [Let's go to docs web](https://docs.zondax.ch/filecoin-virtual-machine/filecoin/fvm) :arrow_upper_right:
 
