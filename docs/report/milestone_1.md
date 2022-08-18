@@ -3,39 +3,9 @@ title: Milestone 1
 sidebar_position: 2
 ---
 
-## Assumptions/Pre-Requirements
-
-Access to the Rust SDK roadmap and development team is granted.
-Weekly call with Rust SDK dev team or at least a representative.
-
-## Technical Scope
-
-- Run Hello World FVM (Lotus Go Library)
-- Run Hello World FVM (miniVM - Docker or similar)
-- Update Assemblyscript FAQ
-- Modelize FVM methods on AssemblyScript
-- List the entire set of methods FVM have now
-- Create definition file with functions signature (name, params, return)
-- Create context objects to allow access to contract-related data, such as caller address, gas used, contract balance, etc.
-- Create storage objects to allow access to get and set functions which will allow the contract to read and persist data.
-
-### Tentative list of functions
-- Current_account_id 
-- Signer_account_id 
-- Block_timestamp 
-- Block_index 
-- Storage_usage 
-- Account_balance 
-- Used_gas 
-- Gas_limit 
-- Storage_write 
-- Storage_read 
-- Storage_remove 
-- Storage_has_key
-
 ## Deliverables
 
-AssemblyScript SDK v0.1 Including the following features:
+This AssemblyScript SDK version includes the following features - [Let's go to the project](https://github.com/Zondax/fvm-as-sdk) :arrow_upper_right:
 
 ### Technical
 | Category           | Subcategory | Description                                                                            | Link                                                                                             |
