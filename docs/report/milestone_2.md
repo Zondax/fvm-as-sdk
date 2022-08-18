@@ -3,26 +3,9 @@ title: Milestone 2
 sidebar_position: 3
 ---
 
-## Assumptions/Pre-Requirements
-
-This phase requires a close collaboration with the Assemblyscript team; it would also be valuable to collaborate with NEAR (they are pioneers in this area). A detailed planning of meetings shall be agreed at the project setup.
-
-Development of additional libraries (eg. c-bor library for storage) and access to certain resources is required.
-
-The availability of these pre-requirements is mandatory to acomplish the Milestone 2. A close collaboration between the parties may avoid any delay.
-
-## Technical Scope
-
-- Create data structures using FVM basic methods: arrays, maps, queues, calls to other contracts, and more.
-- Create utility packages
-- Filecoin address support (AssemblyScript)
-- Common maths operations for FVM
-
 ## Deliverables
 
-Both data structures and utilities packages:
-
-AssemblyScript SDK v0.2:
+This AssemblyScript SDK version includes the following features:
 
 ### Technical
 | Category               | Subcategory  | Description                         | Link                                                                                              |
