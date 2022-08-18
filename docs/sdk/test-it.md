@@ -1,6 +1,6 @@
 ---
-title: How to test it?
-sidebar_position: 5
+title: How to test it in CI?
+sidebar_position: 6
 ---
 
 In order to test your smart contracts, today we have two different options. You can choose either a local VM written on Rust or using a full filecoin dev node.
