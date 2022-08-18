@@ -24,5 +24,5 @@ SEED="when pepper bicycle beef jacket subject document obey lyrics flee tomorrow
 
 **Note:** _Please, again, be friendly! ._ :wink:
 
-## Do you need help with some issues with the node?  :fire::fire:
+## Do you need help with some node issues?  :fire::fire:
 Please, reach us on [Twitter](https://twitter.com/_zondax_)
