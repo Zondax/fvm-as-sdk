@@ -5,7 +5,7 @@ sidebar_position: 3
 
 ## Deliverables
 
-This AssemblyScript SDK version includes the following features:
+This AssemblyScript SDK version includes the following features - [Let's go to the project](https://github.com/Zondax/fvm-as-sdk) :arrow_upper_right:
 
 ### Technical
 | Category               | Subcategory  | Description                         | Link                                                                                              |
