@@ -20,17 +20,10 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '16.13.0'
-          registry-url: "https://verdaccio.zondax.net/"
+          registry-url: "https://registry.npmjs.org"
           scope: "@zondax"
       - name: Install yarn
         run: npm install -g yarn
-      - name: Set npmrc
-        run: |
-          yarn config set @zondax:registry https://verdaccio.zondax.net/
-          npm config set //verdaccio.zondax.net/:_authToken "$VERDACCIO_TOKEN"
-          npm config set //verdaccio.zondax.net/:always-auth true
-        env:
-          VERDACCIO_TOKEN: ${{ secrets.VERDACCIO_READ_TOKEN }}
       - name: Install dependencies
         run: yarn install
       - name: Get latest release version number
@@ -43,4 +36,4 @@ jobs:
       - name: Publish package
         run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.VERDACCIO_READ_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN_PUBLISH_AUTO }}

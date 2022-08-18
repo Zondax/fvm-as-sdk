@@ -28,7 +28,7 @@
     "assemblyscript": "^0.20.4"
   },
   "dependencies": {
-    "@zondax/assemblyscript-cbor": "^0.5.0",
+    "@zondax/assemblyscript-cbor": "^1.0.0",
     "as-bignum": "^0.2.18"
   },
   "files": [

@@ -15,13 +15,6 @@ jobs:
           node-version: '16.13.0'
       - name: Install yarn
         run: npm install -g yarn
-      - name: Set npmrc
-        run: |
-          yarn config set @zondax:registry https://verdaccio.zondax.net/
-          npm config set //verdaccio.zondax.net/:_authToken "$VERDACCIO_TOKEN"
-          npm config set //verdaccio.zondax.net/:always-auth true
-        env:
-          VERDACCIO_TOKEN: ${{ secrets.VERDACCIO_READ_TOKEN }}
       - name: Install dependencies
         run: yarn install
       - name: Build WASM file
