@@ -1,3 +1,8 @@
+---
+title: Resources
+sidebar_position: 1
+---
+
 ## Live Node
 
 In order to allow you to test your smart contracts easily, we are running a node and exposing it to internet for you. 
