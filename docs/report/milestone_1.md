@@ -19,19 +19,19 @@ This AssemblyScript SDK version includes the following features - [Let's go to t
 | Utils functions    | State       | Base state type                                                                        | [:link:](https://github.com/Zondax/fvm-as-sdk/tree/master/assembly/utils/state)                  |
 
 ### Documentation 
-| Category | Subcategory  | Description                      | Link                                                                                                              |
-|----------|--------------|----------------------------------|-------------------------------------------------------------------------------------------------------------------|
-| Docs     | General      | What is the Filecoin blockchain? | [:link:](https://github.com/Zondax/fvm-as-sdk/blob/master/docs/filecoin/filecoin.md)                              |
-| Docs     | General      | What is the FVM?                 | [:link:](https://github.com/Zondax/fvm-as-sdk/blob/master/docs/filecoin/fvm.md#what-is-the-fvm)                   |
-| Docs     | General      | FVM architecture                 | [:link:](https://github.com/Zondax/fvm-as-sdk/blob/master/docs/filecoin/fvm.md#fvm-architecture)                  |
-| Docs     | General      | What is WebAssembly?             | [:link:](https://github.com/Zondax/fvm-as-sdk/blob/master/docs/related-tools/webassembly.md)                      |
-| Docs     | General      | What is AssemblyScript?          | [:link:](https://github.com/Zondax/fvm-as-sdk/blob/master/docs/related-tools/assemblyscript.md)                   |
-| Docs     | General      | What is AssemblyScript SDK?      | [:link:](https://github.com/Zondax/fvm-as-sdk/blob/master/docs/filecoin/fvm.md#fvm-architecture)                  |
-| Docs     | SDK          | Structure                        | [:link:](https://github.com/Zondax/fvm-as-sdk/blob/master/docs/sdk/structure.md)                                  |
-| Docs     | SDK          | How to start?                    | [:link:](https://github.com/Zondax/fvm-as-sdk/blob/master/docs/sdk/how-to-start.md)                               |
-| Docs     | SDK          | How to use it?                   | [:link:](https://github.com/Zondax/fvm-as-sdk/blob/master/docs/sdk/use-it.md)                                     |
-| Docs     | SDK          | How to run it?                   | [:link:](https://github.com/Zondax/fvm-as-sdk/blob/master/docs/sdk/run-it.md)                                     |
-| Docs     | SDK          | How to test it?                  | [:link:](https://github.com/Zondax/fvm-as-sdk/blob/master/docs/sdk/test-it.md)                                    |
-| Docs     | Use cases    | Hello world                      | [:link:](https://github.com/Zondax/fvm-as-sdk/blob/master/docs/examples/hello-world.md)                           |
-| Testing  | CI workflows | Local Rust VM                    | [:link:](https://github.com/Zondax/fil-hello-world-actor-as/blob/master/.github/workflows/main.yaml)              |
-| Testing  | CI workflows | From Lotus terminal              | [:link:](https://github.com/Zondax/fil-hello-world-actor-as/blob/master/.github/workflows/main.yaml)              |
+| Category | Subcategory  | Description                      | Link                                                                                                                        |
+|----------|--------------|----------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| Docs     | General      | What is the Filecoin blockchain? | [:link:](https://github.com/Zondax/fvm-as-sdk/blob/master/docs/introduction/introduction.md#what-is-the-filecoin-blockchain) |
+| Docs     | General      | What is the FVM?                 | [:link:](https://github.com/Zondax/fvm-as-sdk/blob/master/docs/introduction/introduction.md#what-is-the-fvm)                |
+| Docs     | General      | FVM architecture                 | [:link:](https://github.com/Zondax/fvm-as-sdk/blob/master/docs/introduction/introduction.md#fvm-architecture)               |
+| Docs     | General      | What is WebAssembly?             | [:link:](https://github.com/Zondax/fvm-as-sdk/blob/master/docs/introduction/tech-involved.md#what-is-webassembly)           |
+| Docs     | General      | What is AssemblyScript?          | [:link:](https://github.com/Zondax/fvm-as-sdk/blob/master/docs/introduction/tech-involved.md#what-is-assemblyscript)     |
+| Docs     | General      | What is AssemblyScript SDK?      | [:link:](https://github.com/Zondax/fvm-as-sdk/blob/master/docs/introduction/introduction.md#what-is-assemblyscript-sdk)     |
+| Docs     | SDK          | Structure                        | [:link:](https://github.com/Zondax/fvm-as-sdk/blob/master/docs/sdk/structure.md)                                            |
+| Docs     | SDK          | How to start?                    | [:link:](https://github.com/Zondax/fvm-as-sdk/blob/master/docs/sdk/how-to-start.md)                                         |
+| Docs     | SDK          | How to use it?                   | [:link:](https://github.com/Zondax/fvm-as-sdk/blob/master/docs/sdk/use-it.md)                                               |
+| Docs     | SDK          | How to run it?                   | [:link:](https://github.com/Zondax/fvm-as-sdk/blob/master/docs/sdk/run-it.md)                                               |
+| Docs     | SDK          | How to test it?                  | [:link:](https://github.com/Zondax/fvm-as-sdk/blob/master/docs/sdk/test-it.md)                                              |
+| Docs     | Use cases    | Hello world                      | [:link:](https://github.com/Zondax/fvm-as-sdk/blob/master/docs/examples/hello-world.md)                                     |
+| Testing  | CI workflows | Local Rust VM                    | [:link:](https://github.com/Zondax/fil-hello-world-actor-as/blob/master/.github/workflows/main.yaml)                        |
+| Testing  | CI workflows | From Lotus terminal              | [:link:](https://github.com/Zondax/fil-hello-world-actor-as/blob/master/.github/workflows/main.yaml)                        |
