@@ -2,6 +2,12 @@
 title: "Introduction"
 sidebar_position: 1
 ---
+:::info The following project has been funded by the [Filecoin Foundation](https://fil.org).
+
+<img src={require('../assets/fil_foundation.png').default} alt="drawing" width="300" />
+
+:::
+
 ### What is the Filecoin blockchain?
 Filecoin is making the web more secure and efficient with a decentralized data storage marketplace, protocol, and cryptocurrency.
 It is a blockchain-based cooperative digital storage and data retrieval method, allowing users to rent unused hard drive space.
