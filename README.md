@@ -19,5 +19,5 @@ what you really want to create on your smart contract.
 
 ## Are you interested in learning more? :books::books: 
 We have built this beautiful website for you!
-[Let's go to docs web](https://docs.zondax.ch/filecoin-virtual-machine/filecoin/fvm) :arrow_upper_right:
+[Let's go to docs web](https://docs.zondax.ch/filecoin-virtual-machine/introduction/) :arrow_upper_right:
 
