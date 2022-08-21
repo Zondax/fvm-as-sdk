@@ -11,7 +11,7 @@ _Please visit our website at [zondax.ch](https://www.zondax.ch)_
 
 ---
 
-**The AssemblyScript SDK is the official SDK for writing FMV smart contracts using the AssemblyScript language.**
+**The AssemblyScript SDK is the official SDK for writing [FVM](https://fvm.filecoin.io/) smart contracts using the AssemblyScript language.**
 
 This project aims to build the best developer environment to allow you to do your best on what matters: the business logic of your project, 
 what you really want to create on your smart contract.
