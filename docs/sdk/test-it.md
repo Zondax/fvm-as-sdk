@@ -32,8 +32,6 @@ jobs:
     name: "Build and Test"
     timeout-minutes: 5
     runs-on: self-hosted
-    env:
-      VERDACCIO_TOKEN: ${{ secrets.VERDACCIO_READ_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -48,11 +46,6 @@ jobs:
           override: true
       - name: Install yarn
         run: npm install -g yarn
-      - name: Set npmrc
-        run: |
-          yarn config set @zondax:registry https://verdaccio.zondax.net/
-          npm config set //verdaccio.zondax.net/:_authToken "$VERDACCIO_TOKEN"
-          npm config set //verdaccio.zondax.net/:always-auth true
       - name: Install dependencies
         run: |
           yarn install
@@ -121,8 +114,6 @@ jobs:
     name: "Build and Test"
     timeout-minutes: 5
     runs-on: self-hosted
-    env:
-      VERDACCIO_TOKEN: ${{ secrets.VERDACCIO_READ_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -137,11 +128,6 @@ jobs:
           override: true
       - name: Install yarn
         run: npm install -g yarn
-      - name: Set npmrc
-        run: |
-          yarn config set @zondax:registry https://verdaccio.zondax.net/
-          npm config set //verdaccio.zondax.net/:_authToken "$VERDACCIO_TOKEN"
-          npm config set //verdaccio.zondax.net/:always-auth true
       - name: Install dependencies
         run: |
           yarn install

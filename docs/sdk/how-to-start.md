@@ -8,9 +8,7 @@ The recommendation is to start reading these docs, and then go to the hello worl
 to understand how it works, and play with it.
 
 ### What is BaseState class?
-The `BaseState` is an abstract class created to facilitate to read and write the data you want to preserve. In order to achieve this goal, you
-just need to implement two functions: `encode` and `parse`. The first one is used to serialize data to **CBOR** (this is the format FVM uses to save data).
-The second one is used to parse serialized data to a new state with it.
+The `BaseState` is an abstract class created to facilitate to read and write the data you want to preserve. It implements the save and load functions to read from and save to storage.
 
 ### What is @zondax/fvm-as-bindgen?
 This package was created to make developers life easier. In order to make a smart contract work, there is a series of functions and lines of code strictly required by FVM.
@@ -28,12 +26,12 @@ This one allows you to indicate which function will be called when creating new 
 will be instantiated anyway when running `create-actor` cmd. So what is it for? You will be able to set your initial state and save it on the blockchain.
 
 The function signature is
-- ```function <name-you-whish>(params: ParamsRawResult):void```
+- ```function <name-you-whish>():void```
 
 As an example, you can check:
 ```
 @constructor
-function <name-you-whish>(params: ParamsRawResult):void{
+function <name-you-whish>():void{
     // here you could create your initial state and save it on the blockchain
     new State().save()
 }
@@ -46,19 +44,19 @@ will be related to. **The number starts from 2, and they cannot be repeated.**
 
 The possible function signatures are
 
-- ```function <name-you-whish>(params: ParamsRawResult):void```
+- ```function <name-you-whish>():void```
 
-- ```function <name-you-whish>(params: ParamsRawResult):Uint8Array```
+- ```function <name-you-whish>(msg: string, counter: u32):string```
 
 As an example, you can check:
 ```
 @export_method(2)
-function <name-you-whish>(params: ParamsRawResult):void{
+function <name-you-whish>():void{
 }
 
 @export_method(3)
-function <name-you-whish>(params: ParamsRawResult):Uint8Array{
-    return Uint8Array.wrap(String.UTF8.encode("hello world"))
+function <name-you-whish>(msg: string, counter: u32):string{
+    return "hello world"
 }
 ```
 
