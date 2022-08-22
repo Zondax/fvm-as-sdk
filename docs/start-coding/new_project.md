@@ -3,11 +3,19 @@ title: "Creating a new project"
 sidebar_position: 1
 ---
 
-### Pre requisites
+## Pre requisites
 - NodeJS 16
 - Rust 1.61.0-nightly (c5cf08d37 2022-03-30)
 
-### Create project
+## Start your new project
+
+### From template
+You can create a new project based on the template we built for you. 
+It will make things super easy for you, as everything you need is already there. 
+You can either fork the repo or copy the code and create a new repo. 
+[Let's go to the template repo](https://github.com/Zondax/fil-template-actor-as) :arrow_upper_right:
+
+### From scratch
 You can create a new project by running the following lines:
 ```
 npm init
