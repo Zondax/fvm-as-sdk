@@ -60,6 +60,7 @@ Now it is time to add dependencies
 yarn add @zondax/fvm-as-sdk
 yarn add @zondax/fvm-as-bindgen
 yarn add @zondax/assemblyscript-cbor
+yarn add --dev @zondax/fvm-client-tool
 ```
 
 Finally, install them running
