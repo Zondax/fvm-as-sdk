@@ -1,3 +1,7 @@
+---
+title: "Test your code"
+sidebar_position: 4
+---
 
 ## Pre requisites
 In order to interact with your newly created actor, you will need to take three files from `build` folder:
