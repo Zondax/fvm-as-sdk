@@ -1,6 +1,6 @@
 ---
 title: How to run it?
-sidebar_position: 4
+sidebar_position: 5
 ---
 
 First, you need to install your smart contract on the FVM. Once you have done it, you need to create an instance of it. You can create as many instances as you want. Each one will

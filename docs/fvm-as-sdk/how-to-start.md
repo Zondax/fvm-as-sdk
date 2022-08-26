@@ -1,6 +1,6 @@
 ---
 title: How to build your own smart contracts?
-sidebar_position: 3
+sidebar_position: 4
 ---
 
 ### Where do I start?

@@ -1,6 +1,6 @@
 ---
 title: "Using integration test module to test your actor in FVM"
-sidebar_position: 5
+sidebar_position: 6
 ---
 
 To help testing your application without deploying a node you can use the rust (Integration test module)[https://github.com/filecoin-project/ref-fvm/tree/master/testing/integration]. It requires to have Rust 🦀 and be a bit familiar with it.
