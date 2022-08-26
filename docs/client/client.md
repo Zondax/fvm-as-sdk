@@ -20,3 +20,8 @@ To create a new instance of that smart contract, you need the ABI and the CID yo
 ### Interact
 
 To interact with it, you need the ABI and one of two paths: the CID you get when installing the smart contract, or the address of your smart contract instance.
+
+## Tutorial
+
+<iframe  height="500" width="100%" src="https://www.youtube.com/embed/DlG5t5It7CE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen/>
+

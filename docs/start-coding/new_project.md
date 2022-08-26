@@ -15,6 +15,10 @@ It will make things super easy for you, as everything you need is already there.
 You can either fork the repo or copy the code and create a new repo. 
 [Let's go to the template repo](https://github.com/Zondax/fil-template-actor-as) :arrow_upper_right:
 
+<iframe  height="500" width="100%" src="https://www.youtube.com/embed/8NjOzj8DyZg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen/>
+
+
+
 ### From scratch
 You can create a new project by running the following lines:
 ```
