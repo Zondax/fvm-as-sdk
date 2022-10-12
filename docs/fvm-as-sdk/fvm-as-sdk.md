@@ -10,7 +10,7 @@ sidebar_position: 1
 
 ### What is AssemblyScript SDK?
 
-The AssemblyScript SDK is the official SDK for writing FMV smart contracts using the AssemblyScript language.
+The AssemblyScript SDK is the official SDK for writing FVM smart contracts using the AssemblyScript language.
 
 ### What is an SDK?
 
